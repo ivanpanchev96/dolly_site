@@ -1,0 +1,67 @@
+/* Roca Two: add your font files under public/fonts/ and uncomment/edit the path */
+/*
+@font-face {
+  font-family: "Roca Two";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/RocaTwo-Regular.woff2") format("woff2"),
+       url("/fonts/RocaTwo-Regular.woff") format("woff");
+}
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base body text: Poppins 20px, 100% line-height */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Section headings: "Селектирани проекти", "Какво казват клиентите...", etc. */
+.section-heading {
+  font-family: "Roca Two", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: 55px !important;
+  line-height: 60px !important;
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .section-heading {
+    font-size: clamp(28px, 8vw, 55px) !important;
+    line-height: 1.15 !important;
+  }
+}
+
+/* Project page: card titles (e.g. "Home in Blue", "Home in Sage") */
+.project-title {
+  font-family: "Roca Two", Georgia, serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: 25px !important;
+  line-height: 100% !important;
+  letter-spacing: 0 !important;
+}
+
+/* Project page: status subheadings (e.g. "Реализиран", "Проект") */
+.project-status {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: 20px !important;
+  line-height: 100% !important;
+  letter-spacing: 0 !important;
+}

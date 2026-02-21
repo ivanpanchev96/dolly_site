@@ -1,0 +1,38 @@
+[
+  {
+    "id": "home-in-sage",
+    "name": "Home in Sage",
+    "imagePath": "projects/home_in_sage.jpg",
+    "link": "/projects/home-in-sage"
+  },
+  {
+    "id": "home-in-blue",
+    "name": "Home in Blue",
+    "imagePath": "projects/home_in_blue.jpg",
+    "link": "/projects"
+  },
+  {
+    "id": "soft-beige",
+    "name": "Soft Beige",
+    "imagePath": "projects/soft_beige.jpg",
+    "link": "/projects"
+  },
+  {
+    "id": "home-in-pastel",
+    "name": "Home in Pastel",
+    "imagePath": "projects/home_in_pastel.jpg",
+    "link": "/projects/home-in-pastel"
+  },
+  {
+    "id": "mountain-home",
+    "name": "Mountain Home",
+    "imagePath": "projects/mountain_home.jpg",
+    "link": "/projects/mountain-home"
+  },
+  {
+    "id": "studio-24",
+    "name": "Studio 24.5",
+    "imagePath": "projects/studio_24.5.jpg",
+    "link": "/projects/studio-24-5"
+  }
+]
