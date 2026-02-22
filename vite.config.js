@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/dolly_site/", // Change if your repo name differs (e.g. "/" for username.github.io)
+  base: process.env.VITE_BASE_URL || "/dolly_site/", // Use VITE_BASE_URL=/ for custom domain
   build: {
     outDir: "docs",
   },
