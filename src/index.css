@@ -1,14 +1,10 @@
-/* Roca Two: add your font files under public/fonts/ and uncomment/edit the path */
-/*
 @font-face {
   font-family: "Roca Two";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/RocaTwo-Regular.woff2") format("woff2"),
-       url("/fonts/RocaTwo-Regular.woff") format("woff");
+  src: url("./assets/fonts/fonnts.com-Roca_Two_Thin.ttf") format("truetype");
 }
-*/
 
 * {
   box-sizing: border-box;
@@ -21,15 +17,16 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
-  line-height: 100%;
+  line-height: 1.6 !important;
   letter-spacing: 0;
+  text-align: center;
 }
 
 a {
   text-decoration: none;
 }
 
-/* Section headings: "Селектирани проекти", "Какво казват клиентите...", etc. */
+/* Section headings — Figma: Roca Two / Thin / 400 / 55px / 60px leading / 0% tracking */
 .section-heading {
   font-family: "Roca Two", Georgia, serif !important;
   font-weight: 400 !important;

@@ -18,6 +18,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import logo from "./assets/svg/logo.svg";
+import quoteSvg from "./assets/svg/quote.svg";
 import homeHero1 from "./assets/home_page/home-hero-1.jpg";
 import homeHero2 from "./assets/home_page/home-hero-2.jpg";
 import homeHero3 from "./assets/home_page/home-hero-3.jpg";
@@ -85,6 +87,11 @@ function HomePage() {
           "Силно препоръчвам Доли! Тя е изключителен професионалист с подчертано внимание към детайлите. Нейният подход е коректен и експедитивен, което прави процеса на работа изключително приятен и ефективен. Без колебание бих я наел отново за бъдещи проекти.",
         author: "В. Маринов",
       },
+      {
+        text:
+          "В сигурни ръце сте с професионалист като Доли! Бях много объркана и постоянно се двоумях относно интериора на жилището ми. Доли направи целия процес по-лесен, от това да дава съвети, насоки, да ми показва функционални решения, разпределения, материали и всичко от-до, за което се бях (и не бях) сетила.",
+        author: "Н. Тарева",
+      },
     ],
     []
   );
@@ -128,7 +135,7 @@ function HomePage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTestimonialIndex((index) => (index + 1) % testimonials.length);
-    }, 5000);
+    }, 15000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
@@ -154,20 +161,20 @@ function HomePage() {
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
-      <Box sx={{ px: { xs: 0, md: 0 }, py: { xs: 1, md: 2 } }}>
+      <Box>
         <Paper
-          elevation={6}
+          elevation={0}
           sx={{
             position: "relative",
             overflow: "hidden",
             width: "100%",
             height: { xs: "55vh", md: "100vh" },
             minHeight: { xs: 280, md: 560 },
+            borderRadius: 0,
             backgroundImage: `url(${active.src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            bgcolor: "#1f1a18",
           }}
         >
           <Box
@@ -248,7 +255,7 @@ function HomePage() {
             <Typography
               component="h2"
               className="section-heading"
-              sx={{ color: "#3d3229", textAlign: "center" }}
+              sx={{ color: "#675145", textAlign: "center" }}
             >
               Предстои ти ремонт, но не знаеш откъде да започнеш?
             </Typography>
@@ -257,7 +264,6 @@ function HomePage() {
                 color: "#5c5046",
                 fontSize: { xs: "1rem", md: "1.125rem" },
                 lineHeight: 1.6,
-                maxWidth: 520,
                 textAlign: "center",
               }}
             >
@@ -296,7 +302,7 @@ function HomePage() {
         </Container>
       </Box>
 
-      <Container id="about" maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
+      <Container id="about" maxWidth="lg" sx={{ pt: { xs: 5, md: 7 }, pb: 0 }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 3, md: 6 }}
@@ -318,23 +324,19 @@ function HomePage() {
             <Typography
               className="section-heading"
               gutterBottom
-              sx={{ color: "text.primary" }}
+              sx={{ color: "#E1DFDB", textAlign: "left" }}
             >
               Коя съм аз и как мога да ти помогна?
             </Typography>
             <Stack spacing={2}>
-              <Typography color="text.secondary">
-                Аз съм Доли Илюминова, архитект и интериорен дизайнер с над пет
-                години опит в създаването на функционални и стилни пространства в
-                София, Виена и Лондон.
+              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+                Аз съм Доли Ликоманова, архитект и интериорен дизайнер с над пет години опит в създаването на функционални и стилни пространства в София, Виена и Лондон.
               </Typography>
-              <Typography color="text.secondary">
-                Работя с хора, които са заети и нямат време да се губят в хаоса на
-                ремонта. Моята цел е да създам естетика и логика, така че вашето
-                пространство да изглежда красиво и да работи за вас.
+              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+                Работя с хора, които са заети и нямат време да се губят в хаоса на ремонта. Моята цел е да съчетая естетика и логика, така че вашето пространство да изглежда красиво и да работи за вас.
               </Typography>
-              <Typography color="text.secondary">
-                Нека го превърнем заедно, без стрес и излишни компромиси.
+              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+                Нека го преобразим заедно, без стрес и излишни компромиси.
               </Typography>
             </Stack>
             <Button
@@ -379,13 +381,13 @@ function HomePage() {
         <Container maxWidth="lg">
           <Typography
             className="section-heading"
-            sx={{ color: "#3d3229", textAlign: "center" }}
+            sx={{ color: "#675145", textAlign: "center" }}
           >
             Селектирани проекти
           </Typography>
         </Container>
       </Box>
-      <Box sx={{ bgcolor: "#1a1a1a", position: "relative", py: 4 }}>
+      <Box sx={{ bgcolor: "#302c29", position: "relative", py: 4 }}>
         <Stack
           direction="row"
           alignItems="stretch"
@@ -509,7 +511,7 @@ function HomePage() {
         <Container maxWidth="lg">
           <Typography
             className="section-heading"
-            sx={{ color: "#3d3229", textAlign: "center" }}
+            sx={{ color: "#675145", textAlign: "center" }}
           >
             Какво казват клиентите
           </Typography>
@@ -517,20 +519,33 @@ function HomePage() {
       </Box>
 
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, bgcolor: "transparent" }}>
-        <Box
-          sx={{
-            position: "relative",
-            height: { xs: "55vh", md: "50vh" },
-            minHeight: { xs: 380, md: 420 },
-          }}
-        >
+        <Box sx={{ position: "relative" }}>
+          {/* Invisible ghost stack with all testimonials — sets the max height of the section */}
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={3}
-            sx={{
-              mx: { xs: 0, md: 6 },
-              height: "100%",
-            }}
+            sx={{ mx: { xs: 0, md: 6 }, visibility: "hidden", pointerEvents: "none" }}
+            aria-hidden="true"
+          >
+            {[testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)].concat(
+              [testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)]
+            ).map((testimonial, i) => (
+              <Box key={i} sx={{ flex: 1, p: { xs: 3, md: 4 }, display: "flex", flexDirection: "column" }}>
+                <Stack direction="row" spacing={0.5} sx={{ mb: 4 }}>
+                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                </Stack>
+                <Typography color="text.secondary">{testimonial.text}</Typography>
+                <Typography align="center" color="text.secondary" sx={{ my: 2, fontWeight: 900, fontSize: "1.5rem", lineHeight: 1 }}>—</Typography>
+                <Typography align="center" color="text.secondary">{testimonial.author}</Typography>
+              </Box>
+            ))}
+          </Stack>
+          {/* Visible testimonials absolutely overlaid */}
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={3}
+            sx={{ mx: { xs: 0, md: 6 }, position: "absolute", top: 0, left: 0, right: 0 }}
           >
             {visibleTestimonials.map((testimonial) => (
               <Box
@@ -538,23 +553,21 @@ function HomePage() {
                 sx={{
                   flex: 1,
                   p: { xs: 3, md: 4 },
-                  minHeight: 0,
-                  overflow: "auto",
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
-                <Typography
-                  variant="h3"
-                  sx={{ mb: 1, lineHeight: 1, fontSize: { xs: 72, md: 96 }, flexShrink: 0 }}
-                >
-                  “
-                </Typography>
-                <Typography color="text.secondary" sx={{ flex: 1, overflow: "auto" }}>
+                <Stack direction="row" spacing={0.5} sx={{ mb: 4 }}>
+                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                </Stack>
+                <Typography color="text.secondary">
                   {testimonial.text}
                 </Typography>
-                <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.08)", flexShrink: 0 }} />
-                <Typography align="right" color="text.secondary" sx={{ flexShrink: 0 }}>
+                <Typography align="center" color="text.secondary" sx={{ my: 2, fontWeight: 900, fontSize: "1.5rem", lineHeight: 1 }}>
+                  —
+                </Typography>
+                <Typography align="center" color="text.secondary">
                   {testimonial.author}
                 </Typography>
               </Box>
@@ -614,22 +627,24 @@ function HomePage() {
             <Typography
               className="section-heading"
               gutterBottom
-              sx={{ color: "text.primary" }}
+              sx={{ color: "#E1DFDB", textAlign: "left" }}
             >
               Не се колебайте да се свържете с мен!
             </Typography>
-            <Typography color="text.secondary" paragraph>
+            <Typography color="text.secondary" paragraph sx={{ textAlign: "left" }}>
               Нека създадем вашето мечтано пространство заедно!
             </Typography>
             <Stack spacing={2}>
-              <Typography color="text.secondary">
-                Email:{" "}
+              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+                Email:
+                <br />
                 <Box component="span" sx={{ color: "text.primary" }}>
                   likomanova.doli@gmail.com
                 </Box>
               </Typography>
-              <Typography color="text.secondary">
-                Форма за запитване за проект:{" "}
+              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+                Форма за запитване за проект:
+                <br />
                 <Box
                   component="a"
                   href="https://form.jotform.com/241855833689372"
@@ -641,7 +656,7 @@ function HomePage() {
                 </Box>
               </Typography>
               <Stack spacing={1}>
-                <Typography color="text.secondary">
+                <Typography color="text.secondary" paragraph sx={{ textAlign: "left" }}>
                   Follow me on social media
                 </Typography>
                 <Stack direction="row" spacing={1} alignItems="center">
@@ -708,21 +723,20 @@ export default function App() {
     >
       <AppBar position="sticky" elevation={0} sx={{ bgcolor: "#6d5144" }}>
         <Toolbar sx={{ gap: 2, flexWrap: "wrap" }}>
-          <Typography
-            variant="subtitle2"
-            sx={{ letterSpacing: "0.4em", fontWeight: 600 }}
-          >
-            ATELIER BY DOLI
-          </Typography>
+          <Box
+            component="img"
+            src={logo}
+            alt="Atelier by Doli"
+            sx={{ height: 20, display: "block" }}
+          />
           <Stack
             direction="row"
             spacing={2.5}
             sx={{
               flex: 1,
               justifyContent: "center",
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              fontSize: 12,
+              letterSpacing: "0.1em",
+              fontSize: 14,
             }}
           >
             {navLinks.map((link) => {
@@ -735,7 +749,7 @@ export default function App() {
                   component={isHashLink ? "a" : Link}
                   href={isHashLink ? link.to : undefined}
                   to={isHashLink ? undefined : link.to}
-                  sx={{ fontSize: 12, letterSpacing: "0.2em" }}
+                  sx={{ fontSize: 14, letterSpacing: "0.1em", textTransform: "none" }}
                 >
                   {link.label}
                 </Button>
