@@ -30,7 +30,7 @@ import heroSlide1 from "./assets/home_page/hero-slide-1.jpg";
 import heroSlide2 from "./assets/home_page/hero-slide-2.jpg";
 import heroSlide3 from "./assets/home_page/hero-slide-3.jpg";
 import heroSlide4 from "./assets/home_page/hero-slide-4.jpg";
-import doliCutout from "./assets/doli-cutout.png";
+import doliCutout from "./assets/home_page/doli-cutout.png";
 import doliSitting from "./assets/home_page/doli-sitting.jpg";
 import Footer from "./components/Footer.jsx";
 import { selectedProjects } from "./data/selectedProjects.js";

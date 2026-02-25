@@ -1,13 +1,13 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import hero from "../assets/home-in-sage/home-in-sage.png";
-import livingRoom from "../assets/home-in-sage/living-room.png";
-import kitchen from "../assets/home-in-sage/kitchen.png";
-import sofa from "../assets/home-in-sage/sofa.png";
-import reading from "../assets/home-in-sage/reading.png";
-import closet from "../assets/home-in-sage/closet.png";
-import bedroom from "../assets/home-in-sage/bedroom.png";
-import desk from "../assets/home-in-sage/desk.png";
-import wc from "../assets/home-in-sage/wc.png";
+import hero from "../assets/home_in_sage/home_in_sage.png";
+import livingRoom from "../assets/home_in_sage/living-room.png";
+import kitchen from "../assets/home_in_sage/kitchen.png";
+import sofa from "../assets/home_in_sage/sofa.png";
+import reading from "../assets/home_in_sage/reading.png";
+import closet from "../assets/home_in_sage/closet.png";
+import bedroom from "../assets/home_in_sage/bedroom.png";
+import desk from "../assets/home_in_sage/desk.png";
+import wc from "../assets/home_in_sage/wc.png";
 
 const gallery = [
   livingRoom,
