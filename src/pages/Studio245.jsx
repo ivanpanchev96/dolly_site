@@ -40,7 +40,7 @@ function GalleryImage({ src, alt }) {
           width: "100%",
           height: { xs: "auto", md: "100%" },
           display: "block",
-          objectFit: { xs: "none", md: "cover" },
+          objectFit: { md: "cover" },
           objectPosition: "center",
         }}
       />
@@ -57,31 +57,33 @@ export default function Studio245() {
   return (
     <Box sx={{ bgcolor: "background.default", pb: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, px: { xs: 2, sm: 3 } }}>
-        <Grid container spacing={4} alignItems="flex-start">
+        <Grid container spacing={4} alignItems="stretch">
           <Grid item xs={12} md={5}>
-            <Stack spacing={2}>
-              <Typography
-                className="section-heading"
-                sx={{ color: "text.primary", textAlign: "left" }}
-              >
-                Studio 24,5
-              </Typography>
-              <Typography color="text.secondary">
-                Студио с фокус върху максимална функционалност и комфорт.
-              </Typography>
-              <Typography color="text.secondary">
-                Нежното шалфеено зелено и топлите дървени акценти обединяват
-                пространството и ясно разделят зоните за различни дейности.
-              </Typography>
-              <Typography color="text.secondary">
-                Компактно, но добре организирано - с място за всичко, без
-                излишни решения.
-              </Typography>
-              <Typography color="text.secondary">
-                Бюджетно, стилно и практично интериорно решение, подходящо
-                както за краткосрочен, така и за дългосрочен наем.
-              </Typography>
-              <Typography color="text.secondary">
+            <Stack height="100%" justifyContent="space-between">
+              <Stack spacing={2}>
+                <Typography
+                  className="section-heading section-heading--bold"
+                  sx={{ color: "text.primary", textAlign: "left" }}
+                >
+                  Studio 24,5
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Студио с фокус върху максимална функционалност и комфорт.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Нежното шалфеено зелено и топлите дървени акценти обединяват
+                  пространството и ясно разделят зоните за различни дейности.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Компактно, но добре организирано - с място за всичко, без
+                  излишни решения.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Бюджетно, стилно и практично интериорно решение, подходящо
+                  както за краткосрочен, така и за дългосрочен наем.
+                </Typography>
+              </Stack>
+              <Typography className="project-body" color="text.secondary" sx={{ pt: 2 }}>
                 Предназначение: За наем
                 <br />
                 Година на проектиране: 2025г.

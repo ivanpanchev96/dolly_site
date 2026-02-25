@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CloseIcon from "@mui/icons-material/Close";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -12,7 +14,11 @@ import {
   Button,
   Container,
   Divider,
+  Drawer,
   IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
   Paper,
   Stack,
   Toolbar,
@@ -20,9 +26,10 @@ import {
 } from "@mui/material";
 import logo from "./assets/svg/logo.svg";
 import quoteSvg from "./assets/svg/quote.svg";
-import homeHero1 from "./assets/home_page/home-hero-1.jpg";
-import homeHero2 from "./assets/home_page/home-hero-2.jpg";
-import homeHero3 from "./assets/home_page/home-hero-3.jpg";
+import heroSlide1 from "./assets/home_page/hero-slide-1.jpg";
+import heroSlide2 from "./assets/home_page/hero-slide-2.jpg";
+import heroSlide3 from "./assets/home_page/hero-slide-3.jpg";
+import heroSlide4 from "./assets/home_page/hero-slide-4.jpg";
 import doliCutout from "./assets/doli-cutout.png";
 import doliSitting from "./assets/home_page/doli-sitting.jpg";
 import Footer from "./components/Footer.jsx";
@@ -31,15 +38,17 @@ import Projects from "./pages/Projects.jsx";
 import HomeInSage from "./pages/HomeInSage.jsx";
 import HomeInBurgundy from "./pages/HomeInBurgundy.jsx";
 import HomeInPastel from "./pages/HomeInPastel.jsx";
+import HomeInBlue from "./pages/HomeInBlue.jsx";
 import MountainHome from "./pages/MountainHome.jsx";
 import BachelorGrey from "./pages/BachelorGrey.jsx";
 import Studio245 from "./pages/Studio245.jsx";
 import Services from "./pages/Services.jsx";
 
 const images = [
-  { title: "ATELIER BY DOLI", src: homeHero1 },
-  { title: "ATELIER BY DOLI", src: homeHero2 },
-  { title: "ATELIER BY DOLI", src: homeHero3 },
+  { src: heroSlide1 },
+  { src: heroSlide2 },
+  { src: heroSlide3 },
+  { src: heroSlide4 },
 ];
 
 const navLinks = [
@@ -168,15 +177,26 @@ function HomePage() {
             position: "relative",
             overflow: "hidden",
             width: "100%",
-            height: { xs: "55vh", md: "100vh" },
-            minHeight: { xs: 280, md: 560 },
+            height: { md: "100vh" },
+            minHeight: { md: 560 },
             borderRadius: 0,
-            backgroundImage: `url(${active.src})`,
+            backgroundImage: { md: `url(${active.src})` },
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
         >
+          {/* Mobile: real img so the container respects the natural aspect ratio */}
+          <Box
+            component="img"
+            src={active.src}
+            alt=""
+            sx={{
+              display: { xs: "block", md: "none" },
+              width: "100%",
+              height: "auto",
+            }}
+          />
           <Box
             sx={{
               position: "absolute",
@@ -216,30 +236,20 @@ function HomePage() {
           >
             <ArrowForwardIosIcon />
           </IconButton>
-          <Stack
-            direction="row"
-            spacing={2}
+          <Box
+            component="img"
+            src={logo}
+            alt="Atelier by Doli"
             sx={{
               position: "absolute",
               left: "50%",
               top: "45%",
               transform: "translate(-50%, -50%)",
-              alignItems: "center",
-              justifyContent: "center",
+              width: { xs: "55vw", md: "26vw" },
+              maxWidth: 460,
               zIndex: 1,
             }}
-          >
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontSize: "clamp(14px, 4.5vw, 56px)",
-                color: "#E1DFDB",
-                letterSpacing: "0.4em",
-              }}
-            >
-              {active.title}
-            </Typography>
-          </Stack>
+          />
         </Paper>
       </Box>
 
@@ -247,7 +257,7 @@ function HomePage() {
         sx={{
           bgcolor: "#e8e4dc",
           py: { xs: 5, md: 7 },
-          px: 2,
+          px: { xs: 7, md: 2 },
         }}
       >
         <Container maxWidth="md">
@@ -302,7 +312,7 @@ function HomePage() {
         </Container>
       </Box>
 
-      <Container id="about" maxWidth="lg" sx={{ pt: { xs: 5, md: 7 }, pb: 0 }}>
+      <Container id="about" maxWidth="lg" sx={{ pt: { xs: 5, md: 7 }, pb: 0, px: { xs: 7 } }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           spacing={{ xs: 3, md: 6 }}
@@ -318,24 +328,25 @@ function HomePage() {
               height: "auto",
               maxHeight: { xs: 420, md: 520 },
               objectFit: "contain",
+              order: { xs: 2, md: 1 },
             }}
           />
-          <Box sx={{ flex: 1.1 }}>
+          <Box sx={{ flex: 1.1, order: { xs: 1, md: 2 }, display: "flex", flexDirection: "column" }}>
             <Typography
-              className="section-heading"
+              className="section-heading section-heading--bold"
               gutterBottom
-              sx={{ color: "#E1DFDB", textAlign: "left" }}
+              sx={{ color: "#E1DFDB", textAlign: { xs: "center", md: "left" } }}
             >
               Коя съм аз и как мога да ти помогна?
             </Typography>
             <Stack spacing={2}>
-              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+              <Typography color="text.secondary" sx={{ textAlign: { xs: "center", md: "left" } }}>
                 Аз съм Доли Ликоманова, архитект и интериорен дизайнер с над пет години опит в създаването на функционални и стилни пространства в София, Виена и Лондон.
               </Typography>
-              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+              <Typography color="text.secondary" sx={{ textAlign: { xs: "center", md: "left" } }}>
                 Работя с хора, които са заети и нямат време да се губят в хаоса на ремонта. Моята цел е да съчетая естетика и логика, така че вашето пространство да изглежда красиво и да работи за вас.
               </Typography>
-              <Typography color="text.secondary" sx={{ textAlign: "left" }}>
+              <Typography color="text.secondary" sx={{ textAlign: { xs: "center", md: "left" } }}>
                 Нека го преобразим заедно, без стрес и излишни компромиси.
               </Typography>
             </Stack>
@@ -356,6 +367,7 @@ function HomePage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 0,
+                alignSelf: { xs: "center", md: "flex-start" },
                 "&:hover": {
                   bgcolor: "#4a3d36",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
@@ -405,7 +417,8 @@ function HomePage() {
               onClick={() => handleProjectClick(slotIndex, project)}
               sx={{
                 flex: 1,
-                maxWidth: "33.333%",
+                maxWidth: { xs: "100%", md: "33.333%" },
+                display: { xs: slotIndex > 0 ? "none" : "block", md: "block" },
                 position: "relative",
                 cursor: "pointer",
                 overflow: "hidden",
@@ -518,7 +531,7 @@ function HomePage() {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, bgcolor: "transparent" }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, bgcolor: "transparent", px: { xs: 7 } }}>
         <Box sx={{ position: "relative" }}>
           {/* Invisible ghost stack with all testimonials — sets the max height of the section */}
           <Stack
@@ -530,7 +543,7 @@ function HomePage() {
             {[testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)].concat(
               [testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)]
             ).map((testimonial, i) => (
-              <Box key={i} sx={{ flex: 1, p: { xs: 3, md: 4 }, display: "flex", flexDirection: "column" }}>
+              <Box key={i} sx={{ flex: 1, p: { xs: 3, md: 4 }, display: { xs: i > 0 ? "none" : "flex", md: "flex" }, flexDirection: "column" }}>
                 <Stack direction="row" spacing={0.5} sx={{ mb: 4 }}>
                   <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
                   <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
@@ -547,13 +560,13 @@ function HomePage() {
             spacing={3}
             sx={{ mx: { xs: 0, md: 6 }, position: "absolute", top: 0, left: 0, right: 0 }}
           >
-            {visibleTestimonials.map((testimonial) => (
+            {visibleTestimonials.map((testimonial, i) => (
               <Box
                 key={testimonial.author}
                 sx={{
                   flex: 1,
                   p: { xs: 3, md: 4 },
-                  display: "flex",
+                  display: { xs: i > 0 ? "none" : "flex", md: "flex" },
                   flexDirection: "column",
                 }}
               >
@@ -616,16 +629,16 @@ function HomePage() {
       <Container
         id="contact"
         maxWidth="lg"
-        sx={{ pb: { xs: 6, md: 8 }, pt: { xs: 4, md: 5 } }}
+        sx={{ pb: { xs: 6, md: 8 }, pt: { xs: 4, md: 5 }, px: { xs: 7 } }}
       >
         <Stack
           direction={{ xs: "column", md: "row" }}
-          spacing={4}
-          alignItems="center"
+          spacing={{ xs: 0, md: 4 }}
+          alignItems={{ xs: "flex-start", md: "center" }}
         >
-          <Box sx={{ flex: 1.1 }}>
+          <Box sx={{ flex: 1.1, order: { xs: 2, md: 1 } }}>
             <Typography
-              className="section-heading"
+              className="section-heading section-heading--bold"
               gutterBottom
               sx={{ color: "#E1DFDB", textAlign: "left" }}
             >
@@ -694,17 +707,26 @@ function HomePage() {
             </Stack>
           </Box>
           <Box
-            component="img"
-            src={doliSitting}
-            alt="Doli sitting"
             sx={{
               flex: 0.9,
               width: "100%",
-              height: "auto",
-              maxHeight: { xs: 420, md: 520 },
-              objectFit: "contain",
+              order: { xs: 1, md: 2 },
+              mb: { xs: 6, md: 0 },
             }}
-          />
+          >
+            <Box
+              component="img"
+              src={doliSitting}
+              alt="Doli sitting"
+              sx={{
+                width: "100%",
+                height: "auto",
+                maxHeight: { md: 520 },
+                objectFit: { md: "contain" },
+                display: "block",
+              }}
+            />
+          </Box>
         </Stack>
       </Container>
     </Box>
@@ -712,6 +734,8 @@ function HomePage() {
 }
 
 export default function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <Box
       sx={{
@@ -719,16 +743,27 @@ export default function App() {
         bgcolor: "background.default",
         display: "flex",
         flexDirection: "column",
+        overflowX: "hidden",
+        maxWidth: "100vw",
       }}
     >
       <AppBar position="sticky" elevation={0} sx={{ bgcolor: "#6d5144" }}>
-        <Toolbar sx={{ gap: 2, flexWrap: "wrap" }}>
+        <Toolbar sx={{ gap: 2 }}>
+          {/* Logo */}
           <Box
-            component="img"
-            src={logo}
-            alt="Atelier by Doli"
-            sx={{ height: 20, display: "block" }}
-          />
+            component={Link}
+            to="/"
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <Box
+              component="img"
+              src={logo}
+              alt="Atelier by Doli"
+              sx={{ height: 20, display: "block" }}
+            />
+          </Box>
+
+          {/* Desktop nav */}
           <Stack
             direction="row"
             spacing={2.5}
@@ -736,7 +771,7 @@ export default function App() {
               flex: 1,
               justifyContent: "center",
               letterSpacing: "0.1em",
-              fontSize: 14,
+              display: { xs: "none", md: "flex" },
             }}
           >
             {navLinks.map((link) => {
@@ -756,39 +791,73 @@ export default function App() {
               );
             })}
           </Stack>
-          <Stack direction="row" spacing={1}>
-            <IconButton
-              color="inherit"
-              size="small"
-              component="a"
-              href="mailto:likomanovadoli@gmail.com"
-              aria-label="Email"
-            >
+
+          {/* Desktop social icons */}
+          <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton color="inherit" size="small" component="a" href="mailto:likomanovadoli@gmail.com" aria-label="Email">
               <MailOutlineIcon fontSize="small" />
             </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              component="a"
-              href="https://www.linkedin.com/in/doli-likomanova"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <IconButton color="inherit" size="small" component="a" href="https://www.linkedin.com/in/doli-likomanova" target="_blank" rel="noreferrer">
               <LinkedInIcon fontSize="small" />
             </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              component="a"
-              href="https://www.instagram.com/atelier_by_doli"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <IconButton color="inherit" size="small" component="a" href="https://www.instagram.com/atelier_by_doli" target="_blank" rel="noreferrer">
               <InstagramIcon fontSize="small" />
             </IconButton>
           </Stack>
+
+          {/* Mobile hamburger */}
+          <Box sx={{ flex: 1, display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
+            <IconButton color="inherit" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+
+      {/* Mobile slide-in drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        PaperProps={{ sx: { width: 260, bgcolor: "#6d5144", color: "#f4ede7" } }}
+      >
+        {/* Nav links */}
+        <List disablePadding>
+          {navLinks.map((link) => {
+            const isHashLink = link.to.includes("#");
+            return (
+              <ListItemButton
+                key={link.label}
+                component={isHashLink ? "a" : Link}
+                href={isHashLink ? link.to : undefined}
+                to={isHashLink ? undefined : link.to}
+                onClick={() => setMobileMenuOpen(false)}
+                sx={{ px: 3, py: 1.5 }}
+              >
+                <ListItemText
+                  primary={link.label}
+                  primaryTypographyProps={{ fontSize: 16, letterSpacing: "0.05em", color: "#f4ede7" }}
+                />
+              </ListItemButton>
+            );
+          })}
+        </List>
+
+        <Divider sx={{ borderColor: "rgba(244,237,231,0.2)", mt: 1 }} />
+
+        {/* Social icons */}
+        <Stack direction="row" spacing={1} sx={{ px: 2, py: 2 }}>
+          <IconButton color="inherit" size="small" component="a" href="mailto:likomanovadoli@gmail.com" aria-label="Email">
+            <MailOutlineIcon fontSize="small" />
+          </IconButton>
+          <IconButton color="inherit" size="small" component="a" href="https://www.linkedin.com/in/doli-likomanova" target="_blank" rel="noreferrer">
+            <LinkedInIcon fontSize="small" />
+          </IconButton>
+          <IconButton color="inherit" size="small" component="a" href="https://www.instagram.com/atelier_by_doli" target="_blank" rel="noreferrer">
+            <InstagramIcon fontSize="small" />
+          </IconButton>
+        </Stack>
+      </Drawer>
 
       <Box component="main" sx={{ flex: 1 }}>
         <Routes>
@@ -798,6 +867,7 @@ export default function App() {
           <Route path="/projects/home-in-sage" element={<HomeInSage />} />
           <Route path="/projects/home-in-burgundy" element={<HomeInBurgundy />} />
           <Route path="/projects/home-in-pastel" element={<HomeInPastel />} />
+          <Route path="/projects/home-in-blue" element={<HomeInBlue />} />
           <Route path="/projects/mountain-home" element={<MountainHome />} />
           <Route path="/projects/bachelor-grey" element={<BachelorGrey />} />
           <Route path="/projects/studio-24-5" element={<Studio245 />} />

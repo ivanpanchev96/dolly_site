@@ -93,8 +93,12 @@ const faqItems = [
   },
   {
     question: "Мога ли да се възползвам само от консултация, без цялостен проект?",
-    answer:
-      "Да. Не всеки случай изисква пълен интериорен проект. Предлагам самостоятелни консултации, подходящи при нужда от конкретни насоки. Най-често срещаните типове консултации са: Консултация преди покупка на жилище – оглед на място, анализ на потенциала, плюсове и минуси на имота. Консултация при избор на материали и мебели – насоки, доставчици и доверени партньори с добри срокове и цени. Консултация на обект – обсъждане на решения на място и отговори на възникнали въпроси по време на изпълнение.",
+    answer: "Да. Не всеки случай изисква пълен интериорен проект. Предлагам самостоятелни консултации, подходящи при нужда от конкретни насоки. Най-често срещаните типове консултации са:",
+    bullets: [
+      "Консултация преди покупка на жилище – оглед на място, анализ на потенциала, плюсове и минуси на имота.",
+      "Консултация при избор на материали и мебели – насоки, доставчици и доверени партньори с добри срокове и цени.",
+      "Консултация на обект – обсъждане на решения на място и отговори на възникнали въпроси по време на изпълнение.",
+    ],
   },
   {
     question: "В кои населени места работите?",
@@ -123,8 +127,27 @@ const faqItems = [
   },
   {
     question: "Каква е разликата между авторски надзор и управление на проект?",
-    answer:
-      "Авторски надзор: Контрол на изпълнението спрямо проекта. Определен брой посещения на обекта. Разрешаване на казуси по време на строително-ремонтните дейности. Таксува се почасово. Управление на проект: Цялостна координация на всички изпълнители. Организация на огледи и оферти. Осигуряване на достъп до обекта. Контрол на срокове, качество и процеси.",
+    answer: "",
+    sections: [
+      {
+        heading: "Авторски надзор",
+        bullets: [
+          "Контрол на изпълнението спрямо проекта.",
+          "Определен брой посещения на обекта.",
+          "Разрешаване на казуси по време на строително-ремонтните дейности.",
+          "Таксува се почасово.",
+        ],
+      },
+      {
+        heading: "Управление на проект",
+        bullets: [
+          "Цялостна координация на всички изпълнители.",
+          "Организация на огледи и оферти.",
+          "Осигуряване на достъп до обекта.",
+          "Контрол на срокове, качество и процеси.",
+        ],
+      },
+    ],
   },
   {
     question: "Работите ли с определени марки и изпълнители?",
@@ -135,9 +158,15 @@ const faqItems = [
 
 const INQUIRY_FORM_URL = "https://form.jotform.com/241855833689372";
 
-function FaqItem({ question, answer, expanded, onToggle }) {
+function FaqItem({ question, answer, bullets, sections, expanded, onToggle }) {
   const parts = answer.split("(Кликни тук)");
   const hasLink = parts.length > 1;
+  const textSx = {
+    color: "rgba(244,237,231,0.9)",
+    fontSize: 17,
+    lineHeight: 1.6,
+    textAlign: "left",
+  };
 
   return (
     <Box>
@@ -174,92 +203,68 @@ function FaqItem({ question, answer, expanded, onToggle }) {
             <KeyboardArrowRightIcon />
           )}
         </IconButton>
-        <Typography sx={{ fontWeight: 600, fontSize: 15, flex: 1, color: "#ffffff" }}>
+        <Typography sx={{ fontWeight: 400, fontSize: 17, flex: 1, color: "#ffffff", textAlign: "left" }}>
           {question}
         </Typography>
       </Box>
       <Collapse in={expanded}>
-        <Typography
-          sx={{
-            color: "rgba(244,237,231,0.9)",
-            fontSize: 15,
-            lineHeight: 1.6,
-            pt: 1.5,
-            px: 2,
-            pb: 1,
-          }}
-        >
-          {hasLink ? (
-            <>
-              {parts[0]}
-              <Box
-                component="a"
-                href={INQUIRY_FORM_URL}
-                target="_blank"
-                rel="noreferrer"
-                sx={{ color: "#c4b5a6", textDecoration: "underline" }}
-              >
-                Кликни тук
-              </Box>
-              {parts[1]}
-            </>
-          ) : (
-            answer
+        <Box sx={{ pt: 1.5, px: 2, pb: 1 }}>
+          {answer ? (
+            <Typography sx={textSx}>
+              {hasLink ? (
+                <>
+                  {parts[0]}
+                  <Box
+                    component="a"
+                    href={INQUIRY_FORM_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    sx={{ color: "#c4b5a6", textDecoration: "underline" }}
+                  >
+                    Кликни тук
+                  </Box>
+                  {parts[1]}
+                </>
+              ) : (
+                answer
+              )}
+            </Typography>
+          ) : null}
+          {bullets && (
+            <Box component="ul" sx={{ pl: 3, mt: answer ? 0.5 : 0, mb: 0 }}>
+              {bullets.map((item) => (
+                <Box component="li" key={item} sx={{ ...textSx, mb: 0.25 }}>{item}</Box>
+              ))}
+            </Box>
           )}
-        </Typography>
+          {sections && sections.map((section) => (
+            <Box key={section.heading} sx={{ mt: 1 }}>
+              <Typography sx={{ ...textSx, fontWeight: 700 }}>{section.heading}</Typography>
+              <Box component="ul" sx={{ pl: 3, mt: 0.25, mb: 0 }}>
+                {section.bullets.map((item) => (
+                  <Box component="li" key={item} sx={{ ...textSx, mb: 0.25 }}>{item}</Box>
+                ))}
+              </Box>
+            </Box>
+          ))}
+        </Box>
       </Collapse>
     </Box>
   );
 }
 
-function PackageCard({ title, items }) {
+function PackageCard({ title, items, subtitle }) {
   return (
     <Paper
       sx={{
         bgcolor: "#d7d2cd",
         color: "#1f1a18",
-        borderRadius: 1.5,
+        borderRadius: 0,
         overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.2)",
       }}
     >
-      <Box sx={{ bgcolor: "#6d5144", py: 1.5 }}>
-        <Typography align="center" variant="h6" sx={{ color: "#f4ede7" }}>
-          {title}
-        </Typography>
-      </Box>
-      <List
-        dense
-        component="ul"
-        sx={{ px: 2, py: 2, listStyleType: "disc", pl: 3.5 }}
-      >
-        {items.map((item) => (
-          <ListItem
-            key={item}
-            component="li"
-            sx={{ py: 0.6, alignItems: "flex-start", display: "list-item" }}
-          >
-            <ListItemText primary={item} primaryTypographyProps={{ fontSize: 14 }} />
-          </ListItem>
-        ))}
-      </List>
-    </Paper>
-  );
-}
-
-function SmallPackage({ title, items, price }) {
-  return (
-    <Paper
-      sx={{
-        bgcolor: "#d7d2cd",
-        color: "#1f1a18",
-        borderRadius: 1.5,
-        overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.2)",
-      }}
-    >
-      <Box sx={{ bgcolor: "#6d5144", py: 1.4 }}>
-        <Typography align="center" variant="h6" sx={{ color: "#f4ede7" }}>
+      <Box sx={{ bgcolor: "#6d5144", py: 0.75 }}>
+        <Typography className="service-heading" sx={{ color: "#f4ede7" }}>
           {title}
         </Typography>
       </Box>
@@ -272,9 +277,52 @@ function SmallPackage({ title, items, price }) {
           <ListItem
             key={item}
             component="li"
-            sx={{ py: 0.4, alignItems: "flex-start", display: "list-item" }}
+            disableGutters
+            sx={{ py: 0.25, alignItems: "flex-start", display: "list-item" }}
           >
-            <ListItemText primary={item} primaryTypographyProps={{ fontSize: 14 }} />
+            <ListItemText primary={item} sx={{ m: 0 }} primaryTypographyProps={{ fontSize: 16, lineHeight: 1.2 }} />
+          </ListItem>
+        ))}
+      </List>
+      {subtitle && (
+        <Box sx={{ bgcolor: "#6d5144", py: 0.8 }}>
+          <Typography align="center" sx={{ color: "#f4ede7", fontSize: 16 }}>
+            {subtitle}
+          </Typography>
+        </Box>
+      )}
+    </Paper>
+  );
+}
+
+function SmallPackage({ title, items, price }) {
+  return (
+    <Paper
+      sx={{
+        bgcolor: "#d7d2cd",
+        color: "#1f1a18",
+        borderRadius: 0,
+        overflow: "hidden",
+      }}
+    >
+      <Box sx={{ bgcolor: "#6d5144", py: 0.75 }}>
+        <Typography className="service-heading" sx={{ color: "#f4ede7" }}>
+          {title}
+        </Typography>
+      </Box>
+      <List
+        dense
+        component="ul"
+        sx={{ px: 2, py: 1.5, listStyleType: "disc", pl: 3.5 }}
+      >
+        {items.map((item) => (
+          <ListItem
+            key={item}
+            component="li"
+            disableGutters
+            sx={{ py: 0.25, alignItems: "flex-start", display: "list-item" }}
+          >
+            <ListItemText primary={item} sx={{ m: 0 }} primaryTypographyProps={{ fontSize: 16, lineHeight: 1.2 }} />
           </ListItem>
         ))}
       </List>
@@ -306,7 +354,7 @@ export default function Services() {
           sx={{ mb: { xs: 3, md: 4 } }}
         >
           <Typography
-            className="section-heading"
+            className="section-heading section-heading--bold"
             sx={{ color: "text.primary", textAlign: "center" }}
           >
             Пакети
@@ -318,10 +366,10 @@ export default function Services() {
 
         <Grid container spacing={3} alignItems="flex-start">
           <Grid item xs={12} md={4}>
-            <PackageCard title="Базов" items={basicItems} />
+            <PackageCard title="Базов" items={basicItems} subtitle="подходящ за освежителен ремонт" />
           </Grid>
           <Grid item xs={12} md={4}>
-            <PackageCard title="Стандарт" items={standardItems} />
+            <PackageCard title="Стандарт" items={standardItems} subtitle="подходящ за основен ремонт" />
           </Grid>
           <Grid item xs={12} md={4}>
             <Stack spacing={2}>
@@ -365,7 +413,7 @@ export default function Services() {
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={{ xs: 3, md: 4 }}
-            alignItems="stretch"
+            alignItems="flex-end"
           >
             <Box
               sx={{
@@ -386,8 +434,11 @@ export default function Services() {
                 }}
               />
             </Box>
-            <Stack spacing={3} sx={{ flex: 1, justifyContent: "center" }}>
-              <Typography className="section-heading" sx={{ color: "#f4ede7" }}>
+            <Stack spacing={3} sx={{ flex: { md: "0 0 42%" }, alignItems: "flex-start" }}>
+              <Typography
+                className="section-heading section-heading--bold"
+                sx={{ color: "#f4ede7", textAlign: "left" }}
+              >
                 Какви са етапите на проектиране?
               </Typography>
               {designStages.map((stage) => (
@@ -396,8 +447,10 @@ export default function Services() {
                     variant="subtitle1"
                     sx={{
                       color: "#f4ede7",
-                      fontWeight: 600,
-                      mb: 0.5,
+                      fontWeight: 700,
+                      fontSize: "1.45rem",
+                      mb: 1.5,
+                      textAlign: "left",
                     }}
                   >
                     {stage.heading}
@@ -405,8 +458,9 @@ export default function Services() {
                   <Typography
                     sx={{
                       color: "rgba(244,237,231,0.9)",
-                      fontSize: 15,
+                      fontSize: 17,
                       lineHeight: 1.6,
+                      textAlign: "left",
                     }}
                   >
                     {stage.description}
@@ -430,7 +484,7 @@ export default function Services() {
           }}
         >
           <Typography
-            className="section-heading"
+            className="section-heading section-heading--bold"
             sx={{ color: "#f4ede7", textAlign: "center" }}
           >
             Често задавани въпроси
@@ -438,7 +492,7 @@ export default function Services() {
           <Typography
             sx={{
               color: "rgba(244,237,231,0.85)",
-              fontSize: 15,
+              fontSize: 17,
               mt: 1,
               textAlign: "center",
             }}
@@ -456,6 +510,8 @@ export default function Services() {
                     key={i}
                     question={item.question}
                     answer={item.answer}
+                    bullets={item.bullets}
+                    sections={item.sections}
                     expanded={expandedFaq === i}
                     onToggle={() => handleFaqToggle(i)}
                   />
@@ -469,6 +525,8 @@ export default function Services() {
                     key={i}
                     question={item.question}
                     answer={item.answer}
+                    bullets={item.bullets}
+                    sections={item.sections}
                     expanded={expandedFaq === i + 5}
                     onToggle={() => handleFaqToggle(i + 5)}
                   />

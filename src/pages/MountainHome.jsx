@@ -31,7 +31,7 @@ function GalleryImage({ src, alt }) {
           width: "100%",
           height: { xs: "auto", md: "100%" },
           display: "block",
-          objectFit: { xs: "none", md: "cover" },
+          objectFit: { md: "cover" },
           objectPosition: "center",
         }}
       />
@@ -48,29 +48,31 @@ export default function MountainHome() {
   return (
     <Box sx={{ bgcolor: "background.default", pb: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, px: { xs: 2, sm: 3 } }}>
-        <Grid container spacing={4} alignItems="flex-start">
+        <Grid container spacing={4} alignItems="stretch">
           <Grid item xs={12} md={5}>
-            <Stack spacing={2}>
-              <Typography
-                className="section-heading"
-                sx={{ color: "text.primary", textAlign: "left" }}
-              >
-                Mountain Home
-              </Typography>
-              <Typography color="text.secondary">
-                Уютна вила в планината, в която модерният дизайн е балансиран с
-                естествени дървени елементи.
-              </Typography>
-              <Typography color="text.secondary">
-                Прилаганото разпределение на пространството осигурява
-                функционалност, без да нарушава усещането за спокойствие и
-                топлина.
-              </Typography>
-              <Typography color="text.secondary">
-                Интериор, създаден да се усеща естествено и ненатрапчиво - място
-                за почивка, тишина и откъсване от градския ритъм.
-              </Typography>
-              <Typography color="text.secondary">
+            <Stack height="100%" justifyContent="space-between">
+              <Stack spacing={2}>
+                <Typography
+                  className="section-heading section-heading--bold"
+                  sx={{ color: "text.primary", textAlign: "left" }}
+                >
+                  Mountain Home
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Уютна вила в планината, в която модерният дизайн е балансиран с
+                  естествени дървени елементи.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Прилаганото разпределение на пространството осигурява
+                  функционалност, без да нарушава усещането за спокойствие и
+                  топлина.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Интериор, създаден да се усеща естествено и ненатрапчиво - място
+                  за почивка, тишина и откъсване от градския ритъм.
+                </Typography>
+              </Stack>
+              <Typography className="project-body" color="text.secondary" sx={{ pt: 2 }}>
                 Предназначение: лично ползване-семейно
                 <br />
                 Година на проектиране: 2020г.

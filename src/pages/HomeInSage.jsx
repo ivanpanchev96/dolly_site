@@ -24,23 +24,25 @@ export default function HomeInSage() {
   return (
     <Box sx={{ bgcolor: "background.default", pb: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 } }}>
-        <Grid container spacing={4} alignItems="flex-start">
+        <Grid container spacing={4} alignItems="stretch">
           <Grid item xs={12} md={5}>
-            <Stack spacing={2}>
-              <Typography className="section-heading" sx={{ color: "text.primary", textAlign: "left" }}>
-                Home in Sage
-              </Typography>
-              <Typography color="text.secondary">
-                Проект за дом на млада двойка, която обича да прекарва време
-                вкъщи. Меките, топли тонове и нюансите на зеленото създават
-                спокойна атмосфера, подходяща за четене, почивка и домашно кино.
-              </Typography>
-              <Typography color="text.secondary">
-                Цялостната идея е пространствата да бъдат обединени чрез цвят,
-                материали, форми и последователни решения. Интериорът е
-                проектиран да се усеща уютно, без да губи функционалността си.
-              </Typography>
-              <Typography color="text.secondary">
+            <Stack height="100%" justifyContent="space-between">
+              <Stack spacing={2}>
+                <Typography className="section-heading section-heading--bold" sx={{ color: "text.primary", textAlign: "left" }}>
+                  Home in Sage
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Проект за дом на млада двойка, която обича да прекарва време
+                  вкъщи. Меките, топли тонове и нюансите на зеленото създават
+                  спокойна атмосфера, подходяща за четене, почивка и домашно кино.
+                </Typography>
+                <Typography className="project-body" color="text.secondary">
+                  Цялостната идея е пространствата да бъдат обединени чрез цвят,
+                  материали, форми и последователни решения. Интериорът е
+                  проектиран да се усеща уютно, без да губи функционалността си.
+                </Typography>
+              </Stack>
+              <Typography className="project-body" color="text.secondary" sx={{ pt: 2 }}>
                 Предназначение: лично ползване
                 <br />
                 Година на проектиране: 2025г.

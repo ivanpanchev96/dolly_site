@@ -14,7 +14,7 @@ import burgondyHome from "../assets/projects/burgondy_home.jpg";
  * Row 1: small | large, Row 2: large | small, Row 3: small | large, Row 4: large | small.
  */
 const projects = [
-  { title: "Home in Blue", status: "Реализиран", image: homeInBlue },
+  { title: "Home in Blue", status: "Реализиран", image: homeInBlue, link: "/projects/home-in-blue" },
   {
     title: "Home in Sage",
     status: "Проект",
@@ -92,15 +92,15 @@ function ProjectCard({ project }) {
             width: "100%",
             height: { xs: "auto", md: "100%" },
             display: "block",
-            objectFit: { xs: "none", md: "cover" },
+            objectFit: { md: "cover" },
             objectPosition: "center",
           }}
         />
       </Box>
-      <Typography className="project-title" sx={{ mt: 1.5 }}>
+      <Typography className="project-title" sx={{ mt: 3 }}>
         {project.title}
       </Typography>
-      <Typography className="project-status" color="text.secondary">
+      <Typography className="project-status" color="text.secondary" sx={{ mt: 0.5 }}>
         {project.status}
       </Typography>
     </Box>

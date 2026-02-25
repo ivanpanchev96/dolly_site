@@ -6,8 +6,22 @@
   src: url("./assets/fonts/fonnts.com-Roca_Two_Thin.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Roca Two Bold";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/fonnts.com-Roca_Two_Bold.ttf") format("truetype");
+}
+
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* Base body text: Poppins 20px, 100% line-height */
@@ -16,10 +30,10 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1.6 !important;
   letter-spacing: 0;
-  text-align: center;
+  text-align: left;
 }
 
 a {
@@ -45,12 +59,18 @@ a {
 
 /* Project page: card titles (e.g. "Home in Blue", "Home in Sage") */
 .project-title {
-  font-family: "Roca Two", Georgia, serif !important;
-  font-weight: 700 !important;
+  font-family: "Roca Two Bold", Georgia, serif !important;
+  font-weight: 400 !important;
   font-style: normal !important;
   font-size: 25px !important;
-  line-height: 100% !important;
+  line-height: 1.2 !important;
   letter-spacing: 0 !important;
+  text-align: left !important;
+}
+
+/* Project page: status text (e.g. "Реализиран") */
+.project-status {
+  text-align: left !important;
 }
 
 /* Project page: status subheadings (e.g. "Реализиран", "Проект") */
@@ -61,4 +81,26 @@ a {
   font-size: 20px !important;
   line-height: 100% !important;
   letter-spacing: 0 !important;
+}
+
+/* Project detail pages: body/description text */
+.project-body {
+  font-size: 1.15rem !important;
+}
+
+/* Bold variant of section-heading — uses Roca Two Bold font file */
+.section-heading--bold {
+  font-family: "Roca Two Bold", Georgia, serif !important;
+}
+
+/* Services page: package/service title headings (e.g. "Базов", "Стандарт") */
+/* Figma: Roca Two / Bold / 400 / 40px / 60px leading / 0% tracking / center */
+.service-heading {
+  font-family: "Roca Two Bold", Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-size: 32px !important;
+  line-height: 48px !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
 }
