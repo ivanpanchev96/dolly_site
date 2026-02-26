@@ -43,6 +43,8 @@ import MountainHome from "./pages/MountainHome.jsx";
 import BachelorGrey from "./pages/BachelorGrey.jsx";
 import Studio245 from "./pages/Studio245.jsx";
 import Services from "./pages/Services.jsx";
+import Blog from "./pages/Blog.jsx";
+import BlogPost1 from "./pages/BlogPost1.jsx";
 
 const images = [
   { src: heroSlide1 },
@@ -53,10 +55,10 @@ const images = [
 
 const navLinks = [
   { label: "Начало", to: "/" },
-  { label: "За мен", to: "/#about" },
   { label: "Услуги", to: "/services" },
   { label: "Проекти", to: "/projects" },
   { label: "Контакти", to: "/#contact" },
+  { label: "Блог", to: "/blog" },
 ];
 
 const PROJECTS_VISIBLE = 3;
@@ -237,19 +239,41 @@ function HomePage() {
             <ArrowForwardIosIcon />
           </IconButton>
           <Box
-            component="img"
-            src={logo}
-            alt="Atelier by Doli"
             sx={{
               position: "absolute",
               left: "50%",
               top: "45%",
               transform: "translate(-50%, -50%)",
-              width: { xs: "55vw", md: "26vw" },
-              maxWidth: 460,
               zIndex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: { xs: 1.5, md: 2 },
+              width: { xs: "70vw", md: "34vw" },
+              maxWidth: 560,
             }}
-          />
+          >
+            <Box
+              component="img"
+              src={logo}
+              alt="Atelier by Doli"
+              sx={{ width: "100%", display: "block" }}
+            />
+            <Typography
+              sx={{
+                color: "#E1DFDB",
+                fontFamily: '"Poppins", sans-serif',
+                fontWeight: 400,
+                fontSize: { xs: "clamp(11px, 2.8vw, 14px)", md: "clamp(13px, 1.1vw, 17px)" },
+                letterSpacing: "0.04em",
+                textAlign: "center",
+                lineHeight: 1.5,
+                textShadow: "0 1px 4px rgba(0,0,0,0.35)",
+              }}
+            >
+              Персонален интериорен дизайн, който превръща дома или бизнеса ви в уникално пространство.
+            </Typography>
+          </Box>
         </Paper>
       </Box>
 
@@ -871,6 +895,8 @@ export default function App() {
           <Route path="/projects/mountain-home" element={<MountainHome />} />
           <Route path="/projects/bachelor-grey" element={<BachelorGrey />} />
           <Route path="/projects/studio-24-5" element={<Studio245 />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/etapite-na-interiorniya-proekt" element={<BlogPost1 />} />
         </Routes>
       </Box>
 

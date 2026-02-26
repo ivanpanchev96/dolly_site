@@ -7,9 +7,9 @@ import logo from "../assets/svg/logo.svg";
 
 const footerNav = {
   "НАЧАЛО": [
-    { label: "За мен", to: "/#about" },
-    { label: "Тестимониали", to: "/#services" },
+    { label: "Отзиви", to: "/#services" },
     { label: "Проекти", to: "/projects" },
+    { label: "Блог", to: "/blog" },
   ],
   "УСЛУГИ": [
     { label: "Пакети", to: "/services" },
@@ -36,7 +36,8 @@ export default function Footer() {
             display: "grid",
             gridTemplateColumns: { xs: "1fr 1fr", md: "auto auto 1fr auto" },
             gridTemplateRows: { xs: "auto auto", md: "auto" },
-            gap: { xs: 4, md: 0 },
+            rowGap: { xs: 4, md: 0 },
+            columnGap: { xs: 4, md: 8 },
             justifyContent: { md: "space-between" },
             alignItems: { md: "flex-start" },
           }}

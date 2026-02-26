@@ -3,6 +3,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import {
   Box,
+  Button,
   Collapse,
   Container,
   Grid,
@@ -388,22 +389,31 @@ export default function Services() {
           </Grid>
         </Grid>
 
-        <Typography
-          align="center"
-          color="text.secondary"
-          sx={{ mt: { xs: 4, md: 5 } }}
-        >
-          Точна ценова оферта се изготвя след попълване на анкетата{" "}
-          <Box
+        <Box sx={{ mt: { xs: 4, md: 5 }, display: "flex", flexDirection: "column", alignItems: "center", gap: 2.5 }}>
+          <Typography align="center" color="text.secondary">
+            Цените започват от 25–30 €/кв.м (мин. 50 кв.м). За точна цена попълнете кратката анкета (отнема 2мин) и ще получите персонална оферта.
+          </Typography>
+          <Button
             component="a"
-            href="https://form.jotform.com/241855833689372"
-            target="_blank"
-            rel="noreferrer"
-            sx={{ textDecoration: "underline", color: "inherit" }}
+            href="mailto:likomanovadoli@gmail.com"
+            variant="contained"
+            sx={{
+              bgcolor: "#6d5144",
+              color: "#f4ede7",
+              px: 4,
+              py: 1.5,
+              borderRadius: "6px",
+              textTransform: "none",
+              fontFamily: '"Poppins", sans-serif',
+              fontSize: "1rem",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              "&:hover": { bgcolor: "#5a4539" },
+            }}
           >
-            Кликни тук
-          </Box>
-        </Typography>
+            Направи запитване
+          </Button>
+        </Box>
       </Container>
 
       <Box sx={{ width: "100%", height: 2, bgcolor: "#fff" }} />
