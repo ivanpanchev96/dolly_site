@@ -2,37 +2,43 @@
   {
     "id": "home-in-sage",
     "name": "Home in Sage",
-    "imagePath": "projects/home_in_sage.jpg",
+    "imagePath": "selected_projects_cover/home_in_sage.jpg",
     "link": "/projects/home-in-sage"
   },
   {
-    "id": "home-in-blue",
-    "name": "Home in Blue",
-    "imagePath": "projects/home_in_blue.jpg",
-    "link": "/projects"
-  },
-  {
-    "id": "soft-beige",
-    "name": "Soft Beige",
-    "imagePath": "projects/soft_beige.jpg",
-    "link": "/projects"
+    "id": "home-in-burgundy",
+    "name": "Home in Burgundy",
+    "imagePath": "selected_projects_cover/home_in_burgondy.jpg",
+    "link": "/projects/home-in-burgundy"
   },
   {
     "id": "home-in-pastel",
     "name": "Home in Pastel",
-    "imagePath": "projects/home_in_pastel.jpg",
+    "imagePath": "selected_projects_cover/home_in_pastel.jpg",
     "link": "/projects/home-in-pastel"
+  },
+  {
+    "id": "home-in-blue",
+    "name": "Home in Blue",
+    "imagePath": "selected_projects_cover/home_in_blue.jpg",
+    "link": "/projects/home-in-blue"
   },
   {
     "id": "mountain-home",
     "name": "Mountain Home",
-    "imagePath": "projects/mountain_home.jpg",
+    "imagePath": "selected_projects_cover/mountain_home.jpg",
     "link": "/projects/mountain-home"
+  },
+  {
+    "id": "bachelor-grey",
+    "name": "Bachelor Grey",
+    "imagePath": "selected_projects_cover/bachelor_grey.jpg",
+    "link": "/projects/bachelor-grey"
   },
   {
     "id": "studio-24",
     "name": "Studio 24.5",
-    "imagePath": "projects/studio_24.5.jpg",
+    "imagePath": "selected_projects_cover/studio.jpg",
     "link": "/projects/studio-24-5"
   }
 ]

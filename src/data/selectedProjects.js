@@ -7,20 +7,22 @@
 
 import projectsData from "./selectedProjects.json";
 
-import homeInSageImage from "../assets/projects/home_in_sage.jpg";
-import homeInBlueImage from "../assets/projects/home_in_blue.jpg";
-import softBeigeImage from "../assets/projects/soft_beige.jpg";
-import homeInPastelImage from "../assets/projects/home_in_pastel.jpg";
-import mountainHomeImage from "../assets/projects/mountain_home.jpg";
-import studio24_5Image from "../assets/projects/studio_24.5.jpg";
+import homeInSageImage from "../assets/selected_projects_cover/home_in_sage.jpg";
+import homeInBurgundyImage from "../assets/selected_projects_cover/home_in_burgondy.jpg";
+import homeInPastelImage from "../assets/selected_projects_cover/home_in_pastel.jpg";
+import homeInBlueImage from "../assets/selected_projects_cover/home_in_blue.jpg";
+import mountainHomeImage from "../assets/selected_projects_cover/mountain_home.jpg";
+import bachelorGreyImage from "../assets/selected_projects_cover/bachelor_grey.jpg";
+import studioImage from "../assets/selected_projects_cover/studio.jpg";
 
 const imageMap = {
-  "projects/home_in_sage.jpg": homeInSageImage,
-  "projects/home_in_blue.jpg": homeInBlueImage,
-  "projects/soft_beige.jpg": softBeigeImage,
-  "projects/home_in_pastel.jpg": homeInPastelImage,
-  "projects/mountain_home.jpg": mountainHomeImage,
-  "projects/studio_24.5.jpg": studio24_5Image,
+  "selected_projects_cover/home_in_sage.jpg": homeInSageImage,
+  "selected_projects_cover/home_in_burgondy.jpg": homeInBurgundyImage,
+  "selected_projects_cover/home_in_pastel.jpg": homeInPastelImage,
+  "selected_projects_cover/home_in_blue.jpg": homeInBlueImage,
+  "selected_projects_cover/mountain_home.jpg": mountainHomeImage,
+  "selected_projects_cover/bachelor_grey.jpg": bachelorGreyImage,
+  "selected_projects_cover/studio.jpg": studioImage,
 };
 
 export const selectedProjects = projectsData.map((project) => ({

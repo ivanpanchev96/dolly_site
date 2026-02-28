@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/mountain_home/cover.jpg";
 import img1 from "../assets/mountain_home/1.jpg";
 import img2 from "../assets/mountain_home/2.jpg";
@@ -115,6 +116,8 @@ export default function MountainHome() {
             </Box>
           ))}
         </Box>
+
+        <ProjectNav currentPath="/projects/mountain-home" />
       </Container>
     </Box>
   );

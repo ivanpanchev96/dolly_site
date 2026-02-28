@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import hero from "../assets/home_in_sage/home_in_sage.png";
 import livingRoom from "../assets/home_in_sage/living-room.png";
 import kitchen from "../assets/home_in_sage/kitchen.png";
@@ -80,6 +81,8 @@ export default function HomeInSage() {
             </Grid>
           ))}
         </Grid>
+
+        <ProjectNav currentPath="/projects/home-in-sage" />
       </Container>
     </Box>
   );

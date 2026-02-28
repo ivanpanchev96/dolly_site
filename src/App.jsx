@@ -7,7 +7,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
@@ -45,6 +45,7 @@ import Studio245 from "./pages/Studio245.jsx";
 import Services from "./pages/Services.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost1 from "./pages/BlogPost1.jsx";
+import BlogPost2 from "./pages/BlogPost2.jsx";
 
 const images = [
   { src: heroSlide1 },
@@ -204,7 +205,7 @@ function HomePage() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(rgba(34,28,25,0.18), rgba(34,28,25,0.28))",
+                "linear-gradient(rgba(34,28,25,0.30), rgba(34,28,25,0.45))",
               pointerEvents: "none",
             }}
           />
@@ -897,6 +898,8 @@ export default function App() {
           <Route path="/projects/studio-24-5" element={<Studio245 />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/etapite-na-interiorniya-proekt" element={<BlogPost1 />} />
+          <Route path="/blog/kuhnya-funktsionalna" element={<BlogPost2 />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Box>
 

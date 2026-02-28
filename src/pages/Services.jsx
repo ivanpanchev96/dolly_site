@@ -391,11 +391,13 @@ export default function Services() {
 
         <Box sx={{ mt: { xs: 4, md: 5 }, display: "flex", flexDirection: "column", alignItems: "center", gap: 2.5 }}>
           <Typography align="center" color="text.secondary">
-            Цените започват от 25–30 €/кв.м (мин. 50 кв.м). За точна цена попълнете кратката анкета (отнема 2мин) и ще получите персонална оферта.
+            Цените започват от 27–30 €/кв.м (мин. 50 кв.м). За точна цена попълнете кратката анкета (отнема 2мин) и ще получите персонална оферта.
           </Typography>
           <Button
             component="a"
-            href="mailto:likomanovadoli@gmail.com"
+            href="https://form.jotform.com/241855833689372"
+            target="_blank"
+            rel="noreferrer"
             variant="contained"
             sx={{
               bgcolor: "#6d5144",

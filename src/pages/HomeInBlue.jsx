@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/home_in_blue/cover blue project.jpg";
 import img1 from "../assets/home_in_blue/1.jpg";
 import img2 from "../assets/home_in_blue/2.jpg";
@@ -170,6 +171,8 @@ export default function HomeInBlue() {
             );
           })}
         </Box>
+
+        <ProjectNav currentPath="/projects/home-in-blue" />
       </Container>
     </Box>
   );

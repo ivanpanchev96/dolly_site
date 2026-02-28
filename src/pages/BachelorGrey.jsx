@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/bachelor_grey/cover.jpg";
 import img1 from "../assets/bachelor_grey/1.jpg";
 import img2 from "../assets/bachelor_grey/2.jpg";
@@ -129,6 +130,8 @@ export default function BachelorGrey() {
             );
           })}
         </Box>
+
+        <ProjectNav currentPath="/projects/bachelor-grey" />
       </Container>
     </Box>
   );

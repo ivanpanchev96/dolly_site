@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/home_in_burgundy/cover.jpg";
 import img1 from "../assets/home_in_burgundy/1.jpg";
 import img2 from "../assets/home_in_burgundy/2.jpg";
@@ -132,6 +133,8 @@ export default function HomeInBurgundy() {
             );
           })}
         </Box>
+
+        <ProjectNav currentPath="/projects/home-in-burgundy" />
       </Container>
     </Box>
   );

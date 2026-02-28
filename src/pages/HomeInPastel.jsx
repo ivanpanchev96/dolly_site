@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/home_in_pastel/cover.jpg";
 import img1 from "../assets/home_in_pastel/1.jpg";
 import img2 from "../assets/home_in_pastel/2.jpg";
@@ -200,6 +201,8 @@ export default function HomeInPastel() {
             );
           })}
         </Box>
+
+        <ProjectNav currentPath="/projects/home-in-pastel" />
       </Container>
     </Box>
   );

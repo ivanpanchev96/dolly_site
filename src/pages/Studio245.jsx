@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import ProjectNav from "../components/ProjectNav.jsx";
 import cover from "../assets/studio/cover.jpg";
 import img1 from "../assets/studio/1.jpg";
 import img2 from "../assets/studio/2.jpg";
@@ -136,6 +137,8 @@ export default function Studio245() {
             );
           })}
         </Box>
+
+        <ProjectNav currentPath="/projects/studio-24-5" />
       </Container>
     </Box>
   );

@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import doliSitting from "../assets/home_page/doli-sitting.jpg";
+import etapiImg from "../assets/blog/etapi/etapi.jpg";
 import kitchenImg from "../assets/home_in_blue/18.jpg";
 
 const posts = [
   {
-    image: doliSitting,
+    image: etapiImg,
     title: "Етапите на интериорния проект: как протича работата от идея до реализация",
     excerpt:
       "Всеки успешен интериорен проект минава през ясни и структурирани етапи. Добрият дизайн не е просто вдъхновение – той е процес. Ето как протича.....",
@@ -16,7 +16,7 @@ const posts = [
     title: "Как да направиш кухнята не само красива, но и функционална",
     excerpt:
       "Искаш кухнята ти да бъде не само красива, но и удобна за ползване? Правилото на триъгълника в интериорния дизайн е малък трик, който може да промени .....",
-    link: null,
+    link: "/blog/kuhnya-funktsionalna",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function Blog() {
                   alt={post.title}
                   sx={{
                     width: "100%",
-                    height: { xs: "auto", md: 514 },
+                    height: { xs: 400, md: 514 },
                     maxWidth: { md: 343 },
                     objectFit: "cover",
                     objectPosition: "center top",

@@ -243,7 +243,9 @@ export default function BlogPost1() {
           {/* CTA */}
           <Button
             component="a"
-            href="mailto:likomanovadoli@gmail.com"
+            href="https://form.jotform.com/241855833689372"
+            target="_blank"
+            rel="noreferrer"
             variant="contained"
             sx={{
               mt: 4,
