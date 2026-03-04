@@ -42,10 +42,12 @@ import HomeInBlue from "./pages/HomeInBlue.jsx";
 import MountainHome from "./pages/MountainHome.jsx";
 import BachelorGrey from "./pages/BachelorGrey.jsx";
 import Studio245 from "./pages/Studio245.jsx";
+import SoftBeige from "./pages/SoftBeige.jsx";
 import Services from "./pages/Services.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost1 from "./pages/BlogPost1.jsx";
 import BlogPost2 from "./pages/BlogPost2.jsx";
+import BlogPost3 from "./pages/BlogPost3.jsx";
 
 const images = [
   { src: heroSlide1 },
@@ -424,100 +426,100 @@ function HomePage() {
           </Typography>
         </Container>
       </Box>
-      <Box sx={{ bgcolor: "#302c29", position: "relative", py: 4 }}>
-        <Stack
-          direction="row"
-          alignItems="stretch"
-          justifyContent="center"
-          spacing={2}
-          sx={{
-            height: { xs: "22.5vh", md: "32.5vh" },
-            minHeight: { xs: 110, md: 200 },
-            px: { xs: 6, md: 10 },
-          }}
-        >
-          {visibleProjectsList.map((project, slotIndex) => (
-            <Box
-              key={`${project.id}-${projectsStartIndex}-${slotIndex}`}
-              onClick={() => handleProjectClick(slotIndex, project)}
-              sx={{
-                flex: 1,
-                maxWidth: { xs: "100%", md: "33.333%" },
-                display: { xs: slotIndex > 0 ? "none" : "block", md: "block" },
-                position: "relative",
-                cursor: "pointer",
-                overflow: "hidden",
-                "&:hover .project-image": {
-                  transform: "scale(1.03)",
-                },
-              }}
-            >
+      <Box sx={{ bgcolor: "#302c29", py: 4 }}>
+        {/* Images + arrows wrapper — arrows centered on images only */}
+        <Box sx={{ position: "relative", display: "flex", justifyContent: "center" }}>
+          <Stack
+            direction="row"
+            alignItems="stretch"
+            justifyContent="center"
+            spacing={2}
+            sx={{ height: 320 }}
+          >
+            {visibleProjectsList.map((project, slotIndex) => (
               <Box
-                className="project-image"
-                component="img"
-                src={project.image}
-                alt={project.name}
+                key={`${project.id}-${projectsStartIndex}-${slotIndex}`}
+                onClick={() => handleProjectClick(slotIndex, project)}
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  transition: "transform 0.3s ease",
+                  width: { xs: "100%", md: 383 },
+                  height: 320,
+                  flexShrink: 0,
+                  display: { xs: slotIndex > 0 ? "none" : "block", md: "block" },
+                  position: "relative",
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  "&:hover .project-image": {
+                    transform: "scale(1.03)",
+                  },
                 }}
-              />
-              {revealedProjectSlot === slotIndex && (
+              >
                 <Box
+                  className="project-image"
+                  component="img"
+                  src={project.image}
+                  alt={project.name}
                   sx={{
-                    position: "absolute",
-                    inset: 0,
-                    bgcolor: "rgba(0,0,0,0.6)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    px: 2,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    transition: "transform 0.3s ease",
                   }}
-                >
-                  <Typography
-                    variant="h6"
+                />
+                {revealedProjectSlot === slotIndex && (
+                  <Box
                     sx={{
-                      color: "#fff",
-                      textAlign: "center",
-                      fontFamily: "Georgia, serif",
+                      position: "absolute",
+                      inset: 0,
+                      bgcolor: "rgba(0,0,0,0.6)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      px: 2,
                     }}
                   >
-                    {project.name}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-          ))}
-        </Stack>
-        <IconButton
-          onClick={goPrevProjects}
-          sx={{
-            position: "absolute",
-            left: 8,
-            top: "50%",
-            transform: "translateY(-50%)",
-            color: "#fff",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
-          }}
-        >
-          <ArrowBackIosNewIcon />
-        </IconButton>
-        <IconButton
-          onClick={goNextProjects}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: "50%",
-            transform: "translateY(-50%)",
-            color: "#fff",
-            "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
-          }}
-        >
-          <ArrowForwardIosIcon />
-        </IconButton>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: "#fff",
+                        textAlign: "center",
+                        fontFamily: "Georgia, serif",
+                      }}
+                    >
+                      {project.name}
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Stack>
+          <IconButton
+            onClick={goPrevProjects}
+            sx={{
+              position: "absolute",
+              left: { xs: 0, md: "calc(50% - 640px)" },
+              top: "50%",
+              transform: "translate(-100%, -50%)",
+              color: "#fff",
+              "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
+            }}
+          >
+            <ArrowBackIosNewIcon />
+          </IconButton>
+          <IconButton
+            onClick={goNextProjects}
+            sx={{
+              position: "absolute",
+              right: { xs: 0, md: "calc(50% - 640px)" },
+              top: "50%",
+              transform: "translate(100%, -50%)",
+              color: "#fff",
+              "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
+            }}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </Box>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
           <Button
             component={Link}
@@ -616,9 +618,9 @@ function HomePage() {
             onClick={goPrevTestimonial}
             sx={{
               position: "absolute",
-              left: { xs: -6, md: 0 },
+              left: 0,
               top: "50%",
-              transform: "translateY(-50%)",
+              transform: "translate(-100%, -50%)",
               bgcolor: "rgba(255,255,255,0.15)",
               color: "#f4ede7",
               "&:hover": { bgcolor: "rgba(255,255,255,0.25)" },
@@ -630,9 +632,9 @@ function HomePage() {
             onClick={goNextTestimonial}
             sx={{
               position: "absolute",
-              right: { xs: -6, md: 0 },
+              right: 0,
               top: "50%",
-              transform: "translateY(-50%)",
+              transform: "translate(100%, -50%)",
               bgcolor: "rgba(255,255,255,0.15)",
               color: "#f4ede7",
               "&:hover": { bgcolor: "rgba(255,255,255,0.25)" },
@@ -896,9 +898,11 @@ export default function App() {
           <Route path="/projects/mountain-home" element={<MountainHome />} />
           <Route path="/projects/bachelor-grey" element={<BachelorGrey />} />
           <Route path="/projects/studio-24-5" element={<Studio245 />} />
+          <Route path="/projects/soft-beige" element={<SoftBeige />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/etapite-na-interiorniya-proekt" element={<BlogPost1 />} />
           <Route path="/blog/kuhnya-funktsionalna" element={<BlogPost2 />} />
+          <Route path="/blog/kolko-struva-interioren-proekt" element={<BlogPost3 />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Box>

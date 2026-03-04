@@ -39,7 +39,7 @@ const projects = [
     image: mountainHome,
     link: "/projects/mountain-home",
   },
-  { title: "Soft Beige", status: "В реализация", image: softBeige },
+  { title: "Soft Beige", status: "В реализация", image: softBeige, link: "/projects/soft-beige" },
   {
     title: "Bachelor Grey",
     status: "Проект",

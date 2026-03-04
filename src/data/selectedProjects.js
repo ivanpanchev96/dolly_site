@@ -14,6 +14,7 @@ import homeInBlueImage from "../assets/selected_projects_cover/home_in_blue.jpg"
 import mountainHomeImage from "../assets/selected_projects_cover/mountain_home.jpg";
 import bachelorGreyImage from "../assets/selected_projects_cover/bachelor_grey.jpg";
 import studioImage from "../assets/selected_projects_cover/studio.jpg";
+import softBeigeImage from "../assets/selected_projects_cover/home_in_beige.jpg";
 
 const imageMap = {
   "selected_projects_cover/home_in_sage.jpg": homeInSageImage,
@@ -23,6 +24,7 @@ const imageMap = {
   "selected_projects_cover/mountain_home.jpg": mountainHomeImage,
   "selected_projects_cover/bachelor_grey.jpg": bachelorGreyImage,
   "selected_projects_cover/studio.jpg": studioImage,
+  "selected_projects_cover/home_in_beige.jpg": softBeigeImage,
 };
 
 export const selectedProjects = projectsData.map((project) => ({

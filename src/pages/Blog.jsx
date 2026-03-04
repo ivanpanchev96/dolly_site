@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import etapiImg from "../assets/blog/etapi/etapi.jpg";
 import kitchenImg from "../assets/home_in_blue/18.jpg";
+import blogNewImg from "../assets/blog/price/blognew.jpg";
 
 const posts = [
   {
@@ -17,6 +18,13 @@ const posts = [
     excerpt:
       "Искаш кухнята ти да бъде не само красива, но и удобна за ползване? Правилото на триъгълника в интериорния дизайн е малък трик, който може да промени .....",
     link: "/blog/kuhnya-funktsionalna",
+  },
+  {
+    image: blogNewImg,
+    title: "Колко струва един интериорен проект в София през 2026?",
+    excerpt:
+      "\u201EКолко ще ми излезе?\u201C Това е първият въпрос, който получавам. В тази статия ще ти дам реална рамка \u2013 какви са цените, от какво зависят и за какво всъщност плащаш.....",
+    link: "/blog/kolko-struva-interioren-proekt",
   },
 ];
 

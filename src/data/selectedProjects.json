@@ -40,5 +40,11 @@
     "name": "Studio 24.5",
     "imagePath": "selected_projects_cover/studio.jpg",
     "link": "/projects/studio-24-5"
+  },
+  {
+    "id": "soft-beige",
+    "name": "Soft Beige",
+    "imagePath": "selected_projects_cover/home_in_beige.jpg",
+    "link": "/projects/soft-beige"
   }
 ]

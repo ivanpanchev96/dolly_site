@@ -11,6 +11,7 @@ const PROJECTS = [
   { path: "/projects/mountain-home", label: "Mountain Home" },
   { path: "/projects/bachelor-grey", label: "Bachelor Grey" },
   { path: "/projects/studio-24-5", label: "Studio 24/5" },
+  { path: "/projects/soft-beige", label: "Soft Beige" },
 ];
 
 const btnSx = {
