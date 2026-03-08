@@ -2,7 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-router-dom";
-import blogNewImg from "../assets/blog/price/blognew.jpg";
+import blogNewImg from "../assets/blog/price/blognew1.jpg";
 
 const sectionHeadingSx = {
   fontFamily: '"Roca Two Bold", Georgia, serif',
@@ -93,7 +93,7 @@ export default function BlogPost3() {
           </Typography>
           <Box component="ul" sx={{ pl: 2, mt: 0.5, mb: 1 }}>
             {[
-              "30–60+ евро/кв.м за цялостен интериорен проект",
+              "40–90+ евро/кв.м за цялостен интериорен проект",
               "по-ниски стойности при базови пакети",
               "по-високи при комплексни имоти, луксозни изпълнения и пълен мениджмънт",
             ].map((item) => (
@@ -171,6 +171,30 @@ export default function BlogPost3() {
             Затова и моите оферти са персонализирани след попълване на формуляр и консултация, за да съм максимално конкретна и честна спрямо вас.
           </Typography>
 
+          <Button
+            component="a"
+            href="https://form.jotform.com/241855833689372"
+            target="_blank"
+            rel="noreferrer"
+            variant="contained"
+            sx={{
+              mt: 3,
+              bgcolor: "#6d5144",
+              color: "#f4ede7",
+              px: 3,
+              py: 1.2,
+              borderRadius: "6px",
+              textTransform: "none",
+              fontFamily: '"Poppins", sans-serif',
+              fontSize: "1rem",
+              fontWeight: 500,
+              letterSpacing: "0.02em",
+              "&:hover": { bgcolor: "#5a4539" },
+            }}
+          >
+            Направи запитване
+          </Button>
+
           {/* За какво всъщност плащаш? */}
           <Typography sx={{ ...sectionHeadingSx, mt: 4 }}>
             За какво всъщност плащаш?
@@ -245,65 +269,28 @@ export default function BlogPost3() {
             Виж услугите и начина ми на работа
           </Typography>
 
-          {/* CTA — Направи запитване */}
-          <Button
-            component="a"
-            href="https://form.jotform.com/241855833689372"
-            target="_blank"
-            rel="noreferrer"
-            variant="contained"
-            sx={{
-              mt: 4,
-              bgcolor: "#6d5144",
-              color: "#f4ede7",
-              px: 3,
-              py: 1.2,
-              borderRadius: "6px",
-              textTransform: "none",
-              fontFamily: '"Poppins", sans-serif',
-              fontSize: "1rem",
-              fontWeight: 500,
-              letterSpacing: "0.02em",
-              "&:hover": { bgcolor: "#5a4539" },
-            }}
-          >
-            Направи запитване
-          </Button>
-
           {/* Услуги button */}
           <Box sx={{ mt: 2 }}>
             <Button
               component={Link}
               to="/services"
+              variant="contained"
+              endIcon={<KeyboardArrowDownIcon />}
               sx={{
-                borderRadius: "24px",
-                bgcolor: "#5a4a42",
+                bgcolor: "#6d5144",
                 color: "#f4ede7",
-                px: 2.5,
-                py: 1.5,
+                px: 3,
+                py: 1.2,
+                borderRadius: "6px",
                 textTransform: "none",
+                fontFamily: '"Poppins", sans-serif',
                 fontSize: "1rem",
-                fontWeight: 600,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 0,
-                "&:hover": {
-                  bgcolor: "#4a3d36",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
-                },
+                fontWeight: 500,
+                letterSpacing: "0.02em",
+                "&:hover": { bgcolor: "#5a4539" },
               }}
             >
               Услуги
-              <Box
-                sx={{
-                  width: "1px",
-                  height: 20,
-                  bgcolor: "rgba(255,255,255,0.6)",
-                  mx: 1.5,
-                }}
-              />
-              <KeyboardArrowDownIcon sx={{ fontSize: 28 }} />
             </Button>
           </Box>
 

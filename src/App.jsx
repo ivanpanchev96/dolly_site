@@ -23,6 +23,8 @@ import {
   Stack,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import logo from "./assets/svg/logo.svg";
 import quoteSvg from "./assets/svg/quote.svg";
@@ -48,6 +50,7 @@ import Blog from "./pages/Blog.jsx";
 import BlogPost1 from "./pages/BlogPost1.jsx";
 import BlogPost2 from "./pages/BlogPost2.jsx";
 import BlogPost3 from "./pages/BlogPost3.jsx";
+import BlogPost4 from "./pages/BlogPost4.jsx";
 
 const images = [
   { src: heroSlide1 },
@@ -165,6 +168,18 @@ function HomePage() {
     );
     setRevealedProjectSlot(null);
   };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const interval = setInterval(() => {
+      setProjectsStartIndex((i) => (i + 1) % selectedProjects.length);
+      setRevealedProjectSlot(null);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [isMobile]);
+
   const handleProjectClick = (slotIndex, project) => {
     if (revealedProjectSlot === slotIndex) {
       navigate(project.link);
@@ -288,11 +303,11 @@ function HomePage() {
         }}
       >
         <Container maxWidth="md">
-          <Stack spacing={3} alignItems="center" textAlign="center">
+          <Stack spacing={{ xs: 1.5, md: 3 }} alignItems="center" textAlign="center">
             <Typography
               component="h2"
               className="section-heading"
-              sx={{ color: "#675145", textAlign: "center" }}
+              sx={{ color: "#675145", textAlign: "center", fontSize: { xs: 16, md: undefined } }}
             >
               Предстои ти ремонт, но не знаеш откъде да започнеш?
             </Typography>
@@ -434,7 +449,7 @@ function HomePage() {
             alignItems="stretch"
             justifyContent="center"
             spacing={2}
-            sx={{ height: 320 }}
+            sx={{ height: { xs: 240, md: 320 }, mx: { xs: 6, md: 0 } }}
           >
             {visibleProjectsList.map((project, slotIndex) => (
               <Box
@@ -442,7 +457,7 @@ function HomePage() {
                 onClick={() => handleProjectClick(slotIndex, project)}
                 sx={{
                   width: { xs: "100%", md: 383 },
-                  height: 320,
+                  height: { xs: 240, md: 320 },
                   flexShrink: 0,
                   display: { xs: slotIndex > 0 ? "none" : "block", md: "block" },
                   position: "relative",
@@ -903,6 +918,7 @@ export default function App() {
           <Route path="/blog/etapite-na-interiorniya-proekt" element={<BlogPost1 />} />
           <Route path="/blog/kuhnya-funktsionalna" element={<BlogPost2 />} />
           <Route path="/blog/kolko-struva-interioren-proekt" element={<BlogPost3 />} />
+          <Route path="/blog/osvetlenie-v-interiora" element={<BlogPost4 />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Box>
