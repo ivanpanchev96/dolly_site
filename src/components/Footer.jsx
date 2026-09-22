@@ -4,6 +4,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Link } from "react-router-dom";
 import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
 import logo from "../assets/svg/logo.svg";
+import { studio } from "../data/studio.js";
 
 const footerNav = {
   "НАЧАЛО": [
@@ -87,7 +88,7 @@ export default function Footer() {
               КОНТАКТИ
             </Typography>
             <Stack direction="row" spacing={1}>
-              <IconButton size="small" sx={{ color: "#f4ede7", bgcolor: "rgba(0,0,0,0.2)", "&:hover": { bgcolor: "rgba(0,0,0,0.35)" } }} component="a" href="mailto:likomanovadoli@gmail.com" aria-label="Email">
+              <IconButton size="small" sx={{ color: "#f4ede7", bgcolor: "rgba(0,0,0,0.2)", "&:hover": { bgcolor: "rgba(0,0,0,0.35)" } }} component="a" href={`mailto:${studio.email}`} aria-label="Email">
                 <MailOutlineIcon fontSize="small" />
               </IconButton>
               <IconButton size="small" sx={{ color: "#f4ede7", bgcolor: "rgba(0,0,0,0.2)", "&:hover": { bgcolor: "rgba(0,0,0,0.35)" } }} component="a" href="https://www.linkedin.com/in/doli-likomanova" target="_blank" rel="noreferrer" aria-label="LinkedIn">

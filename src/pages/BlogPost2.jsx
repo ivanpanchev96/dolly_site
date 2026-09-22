@@ -3,6 +3,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "react-router-dom";
 import kitchenImg from "../assets/home_in_blue/18.jpg";
 import kitchenTriangle from "../assets/blog/kuhnya/kitchen-triangle.png";
+import { studio } from "../data/studio.js";
 
 const sectionHeadingSx = {
   fontFamily: '"Roca Two Bold", Georgia, serif',
@@ -140,7 +141,7 @@ export default function BlogPost2() {
           <Typography sx={bodySx}>
             <Box
               component="a"
-              href="mailto:likomanovadoli@gmail.com"
+              href={`mailto:${studio.email}`}
               sx={{ color: "inherit", textDecoration: "underline" }}
             >
               Запази консултация сега

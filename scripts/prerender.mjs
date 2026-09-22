@@ -17,8 +17,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
 
-import { routes, canonicalUrl, outputFile } from "../src/data/routes.js";
+import { routes, canonicalUrl, outputFile, SITE_ORIGIN } from "../src/data/routes.js";
 import { startStaticServer } from "./static-server.mjs";
+import { schemaFor } from "./schema.mjs";
+import { studio } from "../src/data/studio.js";
+import { faqItems, faqAnswerFragments } from "../src/data/faq.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT_DIR = path.join(ROOT, "docs");
@@ -104,10 +107,94 @@ async function validate(page, route, errors) {
   return true;
 }
 
-/** Set title/description/canonical in the live DOM before serialization. */
-async function injectHead(page, route) {
+/**
+ * Facts read from the rendered page: the representative image and the <h1>.
+ *
+ * The image is awaited to decode first. page.goto only waits for
+ * domcontentloaded, so naturalWidth can otherwise read 0 — non-deterministically,
+ * which would break byte-identical rebuilds.
+ *
+ * Note img.src resolves against the throwaway static server's origin
+ * (http://127.0.0.1:<random port>), so only the pathname is usable; the caller
+ * re-roots it on SITE_ORIGIN. Emitting img.src directly would publish localhost
+ * URLs.
+ */
+async function readPageFacts(page, route) {
+  const facts = await page.evaluate(async () => {
+    const heading = document.querySelector("h1")?.textContent?.trim() || null;
+    const img = document.querySelector("main img");
+    if (!img) return { heading, image: null };
+
+    try {
+      if (!img.complete) await img.decode();
+    } catch {
+      /* fall through to the naturalWidth check below */
+    }
+
+    return {
+      heading,
+      image: {
+        pathname: new URL(img.src).pathname,
+        alt: img.getAttribute("alt") || "",
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+      },
+    };
+  });
+
+  if (!facts.image) {
+    fail(route.path, "no <main> image found — cannot build og:image");
+    return facts;
+  }
+  if (!facts.image.width || !facts.image.height) {
+    fail(route.path, "representative image reported 0 dimensions (decode did not complete)");
+    return facts;
+  }
+
+  facts.image.url = SITE_ORIGIN + facts.image.pathname;
+  return facts;
+}
+
+/**
+ * A portrait or small image letterboxes badly in a large Twitter card, so the
+ * card type follows the actual image rather than being hardcoded.
+ */
+function twitterCard(image) {
+  return image.width >= 600 && image.width / image.height >= 1.3
+    ? "summary_large_image"
+    : "summary";
+}
+
+function metaTagsFor(route, facts) {
+  const url = canonicalUrl(route.path);
+  const image = facts.image;
+  const isArticle = route.path.startsWith("/blog/");
+  const ext = image.pathname.split(".").pop().toLowerCase();
+
+  return [
+    ["og:type", isArticle ? "article" : "website"],
+    ["og:site_name", studio.name],
+    ["og:locale", "bg_BG"],
+    ["og:title", route.title],
+    ["og:description", route.description],
+    ["og:url", url],
+    ["og:image", image.url],
+    ["og:image:type", ext === "png" ? "image/png" : "image/jpeg"],
+    ["og:image:width", String(image.width)],
+    ["og:image:height", String(image.height)],
+    ["og:image:alt", image.alt || route.title],
+    ["twitter:card", twitterCard(image)],
+    ["twitter:title", route.title],
+    ["twitter:description", route.description],
+    ["twitter:image", image.url],
+    ["twitter:image:alt", image.alt || route.title],
+  ];
+}
+
+/** Set title/description/canonical/social/JSON-LD in the live DOM before serialization. */
+async function injectHead(page, route, facts) {
   await page.evaluate(
-    ({ title, description, canonical }) => {
+    ({ title, description, canonical, metas, jsonLd }) => {
       document.title = title;
 
       let desc = document.querySelector('meta[name="description"]');
@@ -125,11 +212,38 @@ async function injectHead(page, route) {
         document.head.appendChild(link);
       }
       link.setAttribute("href", canonical);
+
+      for (const [key, value] of metas) {
+        const attr = key.startsWith("og:") ? "property" : "name";
+        let tag = document.querySelector(`meta[${attr}="${key}"]`);
+        if (!tag) {
+          tag = document.createElement("meta");
+          tag.setAttribute(attr, key);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute("content", value);
+      }
+
+      let ld = document.querySelector('script[type="application/ld+json"]');
+      if (!ld) {
+        ld = document.createElement("script");
+        ld.setAttribute("type", "application/ld+json");
+        document.head.appendChild(ld);
+      }
+      ld.textContent = jsonLd;
     },
     {
       title: route.title,
       description: route.description,
       canonical: canonicalUrl(route.path),
+      metas: metaTagsFor(route, facts),
+      // <script> is an HTML raw-text element, so outerHTML will not escape "<"
+      // inside it. Escaping here keeps a "</script>" in any content from
+      // terminating the tag and breaking the page.
+      jsonLd: JSON.stringify(schemaFor(route, { image: facts.image?.url, heading: facts.heading }), null, 2)
+        .replace(/</g, "\\u003c")
+        .replace(/>/g, "\\u003e")
+        .replace(/&/g, "\\u0026"),
     }
   );
 }
@@ -147,6 +261,134 @@ async function checkRouteParity() {
   for (const p of declared) {
     if (!manifest.has(p)) {
       fail(p, "declared in src/App.jsx <Routes> but missing from src/data/routes.js — it will not be prerendered");
+    }
+  }
+}
+
+const REQUIRED_META = [
+  "og:type", "og:site_name", "og:locale", "og:title", "og:description", "og:url",
+  "og:image", "og:image:width", "og:image:height", "og:image:alt",
+  "twitter:card", "twitter:title", "twitter:description", "twitter:image",
+];
+
+/** Social tags: all present, non-empty, and every URL absolute. */
+function checkMeta(route, html) {
+  const found = new Map();
+  for (const m of html.matchAll(/<meta (?:property|name)="((?:og|twitter):[\w:]+)" content="([^"]*)"/g)) {
+    found.set(m[1], m[2]);
+  }
+
+  for (const key of REQUIRED_META) {
+    if (!found.get(key)) fail(route.path, `missing or empty meta ${key}`);
+  }
+
+  for (const key of ["og:url", "og:image", "twitter:image"]) {
+    const value = found.get(key);
+    if (value && !value.startsWith(`${SITE_ORIGIN}/`)) {
+      fail(route.path, `${key} is not absolute against the site origin: ${value}`);
+    }
+  }
+
+  const expectedType = route.path.startsWith("/blog/") ? "article" : "website";
+  if (found.get("og:type") !== expectedType) {
+    fail(route.path, `og:type is "${found.get("og:type")}", expected "${expectedType}"`);
+  }
+
+  if (found.get("og:url") !== canonicalUrl(route.path)) {
+    fail(route.path, `og:url disagrees with the canonical URL: ${found.get("og:url")}`);
+  }
+}
+
+/** Structured data: parses, well-formed, and asserts nothing we chose not to claim. */
+function checkJsonLd(route, html) {
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  if (blocks.length !== 1) {
+    fail(route.path, `expected exactly 1 JSON-LD block, found ${blocks.length}`);
+    return;
+  }
+
+  let data;
+  try {
+    // Undo the <-style escaping applied at injection time.
+    data = JSON.parse(blocks[0][1]);
+  } catch (e) {
+    fail(route.path, `JSON-LD does not parse: ${e.message}`);
+    return;
+  }
+
+  const graph = data["@graph"];
+  if (data["@context"] !== "https://schema.org" || !Array.isArray(graph) || graph.length < 3) {
+    fail(route.path, "JSON-LD is missing @context or has too small a @graph");
+    return;
+  }
+
+  const serialized = JSON.stringify(graph);
+  // These would be fabricated: the testimonials carry no ratings at all.
+  if (serialized.includes("aggregateRating") || serialized.includes("reviewRating")) {
+    fail(route.path, "JSON-LD contains a rating — the testimonials have none, so it would be invented");
+  }
+  if (/"(undefined|null|NaN)"/.test(serialized) || serialized.includes('""')) {
+    fail(route.path, "JSON-LD contains an empty or placeholder value");
+  }
+
+  const ids = graph.map((n) => n["@id"]).filter(Boolean);
+  if (new Set(ids).size !== ids.length) {
+    fail(route.path, "JSON-LD has duplicate @id values");
+  }
+
+  if (route.path === "/services") {
+    const faq = graph.find((n) => n["@type"] === "FAQPage");
+    if (!faq || faq.mainEntity.length !== faqItems.length) {
+      fail(route.path, `FAQPage should carry ${faqItems.length} questions`);
+    }
+    for (const q of faq?.mainEntity ?? []) {
+      if (!q.acceptedAnswer?.text?.trim()) {
+        fail(route.path, `FAQ question has an empty answer: ${q.name}`);
+      }
+    }
+  }
+
+  if (route.path.startsWith("/blog/")) {
+    const post = graph.find((n) => n["@type"] === "BlogPosting");
+    for (const field of ["headline", "image", "datePublished", "author"]) {
+      if (!post?.[field]) fail(route.path, `BlogPosting is missing ${field}`);
+    }
+  }
+}
+
+/**
+ * Every fragment a reader sees in the FAQ must survive into acceptedAnswer.
+ * Guards against the renderer and src/data/faq.js drifting apart.
+ */
+function checkFaqAgainstRenderedPage(html) {
+  // Compare against rendered text, not raw HTML: an answer can be split by
+  // markup (the inquiry link) or assembled from a <ul>, so it is never a
+  // contiguous substring of the source.
+  //
+  // Strip <script> and <style> first — critically the JSON-LD, which contains
+  // these very answers. Without that the check reads back the schema this build
+  // just emitted and passes even when the page renders nothing.
+  const pageText = html
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
+
+  for (const item of faqItems) {
+    if (!pageText.includes(item.question.replace(/\s+/g, " "))) {
+      fail("/services", `FAQ question is in the data but not on the page: "${item.question}"`);
+    }
+
+    const fragments = faqAnswerFragments(item);
+    if (fragments.length === 0) {
+      fail("/services", `FAQ answer flattened to nothing: "${item.question}"`);
+    }
+    for (const fragment of fragments) {
+      if (!pageText.includes(fragment)) {
+        fail(
+          "/services",
+          `FAQ text is in the data but not rendered on the page — the renderer and src/data/faq.js have drifted: "${fragment.slice(0, 70)}…"`
+        );
+      }
     }
   }
 }
@@ -180,6 +422,25 @@ async function checkOutputs() {
     if (h1s.length !== 1) {
       fail(route.path, `expected exactly 1 <h1>, found ${h1s.length}`);
     }
+
+    // The crawl runs against a throwaway localhost server. Anything that leaks
+    // its origin into the output is broken for every real visitor — and the
+    // relative-URL guard above cannot see it, since og:image uses content=.
+    if (/127\.0\.0\.1|localhost/.test(html)) {
+      fail(route.path, "output contains a localhost URL — a crawl-time origin leaked into the page");
+    }
+
+    // The email had two wrong variants before src/data/studio.js; keep it fixed.
+    const emails = new Set(html.match(/[\w.+-]+@[\w.-]+\.\w+/g) || []);
+    for (const found of emails) {
+      if (found !== studio.email) {
+        fail(route.path, `unexpected email address in output: ${found}`);
+      }
+    }
+
+    checkMeta(route, html);
+    checkJsonLd(route, html);
+    if (route.path === "/services") checkFaqAgainstRenderedPage(html);
   }
 
   try {
@@ -256,7 +517,10 @@ async function main() {
         continue;
       }
 
-      await injectHead(page, route);
+      const facts = await readPageFacts(page, route);
+      if (!facts.image?.url) continue;
+
+      await injectHead(page, route, facts);
 
       if (!(await validate(page, route, errors))) continue;
 

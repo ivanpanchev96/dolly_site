@@ -1,40 +1,7 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import etapiImg from "../assets/blog/etapi/etapi.jpg";
-import kitchenImg from "../assets/home_in_blue/18.jpg";
-import blogNewImg from "../assets/blog/price/blognew1.jpg";
-import lightCover from "../assets/blog/osvetlenie/light_cover.jpg";
+import { blogPosts as posts } from "../data/blogPosts.js";
 
-const posts = [
-  {
-    image: etapiImg,
-    title: "Етапите на интериорния проект: как протича работата от идея до реализация",
-    excerpt:
-      "Всеки успешен интериорен проект минава през ясни и структурирани етапи. Добрият дизайн не е просто вдъхновение – той е процес. Ето как протича.....",
-    link: "/blog/etapite-na-interiorniya-proekt",
-  },
-  {
-    image: kitchenImg,
-    title: "Как да направиш кухнята не само красива, но и функционална",
-    excerpt:
-      "Искаш кухнята ти да бъде не само красива, но и удобна за ползване? Правилото на триъгълника в интериорния дизайн е малък трик, който може да промени .....",
-    link: "/blog/kuhnya-funktsionalna",
-  },
-  {
-    image: blogNewImg,
-    title: "Колко струва един интериорен проект в София през 2026?",
-    excerpt:
-      "\u201EКолко ще ми излезе?\u201C Това е първият въпрос, който получавам. В тази статия ще ти дам реална рамка \u2013 какви са цените, от какво зависят и за какво всъщност плащаш.....",
-    link: "/blog/kolko-struva-interioren-proekt",
-  },
-  {
-    image: lightCover,
-    title: "Осветление в интериора: защо една лампа не е достатъчна",
-    excerpt:
-      "В много домове осветлението се свежда до едно нещо: централна лампа на тавана. Но реално това е един от най-честите проблеми в интериора.....",
-    link: "/blog/osvetlenie-v-interiora",
-  },
-];
 
 export default function Blog() {
   return (

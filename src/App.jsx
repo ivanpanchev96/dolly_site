@@ -36,6 +36,8 @@ import doliCutout from "./assets/home_page/doli-cutout.png";
 import doliSitting from "./assets/home_page/doli-sitting.jpg";
 import Footer from "./components/Footer.jsx";
 import { selectedProjects } from "./data/selectedProjects.js";
+import { testimonials } from "./data/testimonials.js";
+import { studio } from "./data/studio.js";
 import { IS_PRERENDER } from "./prerenderMode.js";
 import Projects from "./pages/Projects.jsx";
 import HomeInSage from "./pages/HomeInSage.jsx";
@@ -85,36 +87,6 @@ function HomePage() {
       selectedProjects[(projectsStartIndex + i) % n]
     );
   }, [projectsStartIndex]);
-  const testimonials = useMemo(
-    () => [
-      {
-        text:
-          "Работата с Доли беше удоволствие. Тя ми даде разнообразни възможности за подредбата на моето пространство, което значително улесни избора и ми помогна да направя дома си точно такъв, какъвто съм си представяла.",
-        author: "Б. Иванова",
-      },
-      {
-        text:
-          "Определено бих избрал да работя с нея отново. Благодарение на професионалния подход и вниманието към детайла получих пространство, което е едновременно красиво и функционално.",
-        author: "Д. Андреева",
-      },
-      {
-        text:
-          "Доли е изключителен професионалист, който не само прави функционални дизайни, предназначени за конкретния клиент, но и съдейства цялостно в процеса по избор на материали/продукти, координация на изпълнителите, до завършване на проекта. Комуникацията с Доли е гладка, приятелска, тя винаги дава полезна информация и насоки. Нямаше да се справим без Доли и сме изключително доволни от резултата!",
-        author: "Д. Динева",
-      },
-      {
-        text:
-          "Силно препоръчвам Доли! Тя е изключителен професионалист с подчертано внимание към детайлите. Нейният подход е коректен и експедитивен, което прави процеса на работа изключително приятен и ефективен. Без колебание бих я наел отново за бъдещи проекти.",
-        author: "В. Маринов",
-      },
-      {
-        text:
-          "В сигурни ръце сте с професионалист като Доли! Бях много объркана и постоянно се двоумях относно интериора на жилището ми. Доли направи целия процес по-лесен, от това да дава съвети, насоки, да ми показва функционални решения, разпределения, материали и всичко от-до, за което се бях (и не бях) сетила.",
-        author: "Н. Тарева",
-      },
-    ],
-    []
-  );
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const visibleTestimonials = useMemo(() => {
     if (testimonials.length === 0) {
@@ -717,7 +689,7 @@ function HomePage() {
                 Email:
                 <br />
                 <Box component="span" sx={{ color: "text.primary" }}>
-                  likomanova.doli@gmail.com
+                  {studio.email}
                 </Box>
               </Typography>
               <Typography color="text.secondary" sx={{ textAlign: "left" }}>
@@ -742,7 +714,7 @@ function HomePage() {
                     size="small"
                     color="inherit"
                     component="a"
-                    href="mailto:likomanovadoli@gmail.com"
+                    href={`mailto:${studio.email}`}
                     aria-label="Email"
                   >
                     <MailOutlineIcon fontSize="small" />
@@ -859,7 +831,7 @@ export default function App() {
 
           {/* Desktop social icons */}
           <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton color="inherit" size="small" component="a" href="mailto:likomanovadoli@gmail.com" aria-label="Email">
+            <IconButton color="inherit" size="small" component="a" href={`mailto:${studio.email}`} aria-label="Email">
               <MailOutlineIcon fontSize="small" />
             </IconButton>
             <IconButton color="inherit" size="small" component="a" href="https://www.linkedin.com/in/doli-likomanova" target="_blank" rel="noreferrer">
@@ -912,7 +884,7 @@ export default function App() {
 
         {/* Social icons */}
         <Stack direction="row" spacing={1} sx={{ px: 2, py: 2 }}>
-          <IconButton color="inherit" size="small" component="a" href="mailto:likomanovadoli@gmail.com" aria-label="Email">
+          <IconButton color="inherit" size="small" component="a" href={`mailto:${studio.email}`} aria-label="Email">
             <MailOutlineIcon fontSize="small" />
           </IconButton>
           <IconButton color="inherit" size="small" component="a" href="https://www.linkedin.com/in/doli-likomanova" target="_blank" rel="noreferrer">

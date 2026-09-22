@@ -21,14 +21,76 @@ npm run build
 > `vite build` alone produces a `docs/` with no route directories and no
 > `404.html`, which means every route except `/` would return HTTP 404 again.
 
-The build has three stages:
+The build has four stages:
 
 1. `build:vite` — Vite compiles to `docs/`.
-2. `prerender` — headless Chrome loads all 16 routes and writes the rendered
+2. `prerender` — headless Chrome loads all 16 routes, injects per-page metadata
+   (title, description, canonical, Open Graph, JSON-LD) and writes the rendered
    HTML to `docs/<route>/index.html`.
 3. `sitemap` — writes `docs/sitemap.xml`.
+4. `llms` — writes `docs/llms.txt`.
 
 A failed prerender exits non-zero and stops the build.
+
+## Data modules
+
+`src/data/` holds the content the build needs to read as data. These files are
+imported by both the React app and the Node build scripts, so they **must not
+import JSX or asset files** — Node cannot load those.
+
+| File | Holds |
+|---|---|
+| `routes.js` | the 16 routes: path, title, description, assert marker |
+| `studio.js` | business facts: name, email, socials, prices, service areas |
+| `testimonials.js` | the 5 client testimonials |
+| `faq.js` | the 9 FAQ entries + `faqAnswerFragments()` |
+| `blogPosts.json` | blog post copy and publish dates |
+| `selectedProjects.json` | homepage carousel projects |
+
+Where images are involved the data is split in two — `blogPosts.json` +
+`blogPosts.js`, `selectedProjects.json` + `selectedProjects.js` — because the
+`.js` half imports the images and so is browser-only.
+
+Contact details live only in `studio.js`. The site previously had two different
+email addresses, neither correct; the build now fails if any address other than
+`studio.email` appears in the output.
+
+## Structured data
+
+`scripts/schema.mjs` builds a JSON-LD `@graph` per page. It asserts only what
+the site already states, and three omissions are deliberate:
+
+- **No ratings.** The testimonials carry no stars, so `Review` has no
+  `reviewRating` and there is no `aggregateRating`. Inventing them would be
+  fabricating data — and Google excludes self-serving reviews from rich results
+  regardless, so it would buy nothing. The build fails if a rating appears.
+- **No address, phone or opening hours**, because none exist. That is why the
+  studio is typed `Organization`: `ProfessionalService` and the other
+  `LocalBusiness` subtypes require an address.
+- **No project year or status.** On the project pages these are free text with
+  drifting labels, and `Projects.jsx` contradicts the pages for one project.
+
+### Keeping the FAQ honest
+
+The FAQ answers are transformed on render: one is split around a link, one is
+assembled from a `<ul>`, and one has an empty `answer` with all its content in
+`sections`. `faqAnswerFragments()` in `src/data/faq.js` reproduces what a reader
+actually sees, and the build asserts every fragment appears in the rendered page
+— with `<script>` stripped first, so the check cannot satisfy itself from the
+JSON-LD it just emitted.
+
+### og:image
+
+Resolved per route from `document.querySelector('main img')` during the crawl,
+with dimensions read after `img.decode()` so they are true and deterministic.
+Only the image's **pathname** is used: `img.src` resolves against the throwaway
+crawl server, so emitting it directly would publish `127.0.0.1` URLs. The build
+fails on any localhost string in the output.
+
+Most of these images are small and portrait (the blog covers are 343×514),
+so `twitter:card` is computed per route rather than hardcoded. Proper 1200×630
+share cards would be an improvement — drop them in `public/og/` and reference
+them from `routes.js`.
 
 ## Checking a build locally
 
