@@ -53,6 +53,7 @@ export default function BlogPost2() {
           />
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
             <Typography
+              component="h1"
               sx={{
                 fontFamily: '"Roca Two Bold", Georgia, serif',
                 fontSize: { xs: "clamp(20px, 4vw, 32px)", md: "clamp(32px, 3.5vw, 52px)" },
@@ -74,7 +75,7 @@ export default function BlogPost2() {
         <Box>
 
           {/* Section: Какво е правилото на триъгълника */}
-          <Typography sx={sectionHeadingSx}>
+          <Typography component="h2" sx={sectionHeadingSx}>
             Какво е правилото на триъгълника в кухнята?
           </Typography>
           <Typography sx={bodySx}>
@@ -92,7 +93,7 @@ export default function BlogPost2() {
           />
 
           {/* Section: Защо работи? */}
-          <Typography sx={sectionHeadingSx}>
+          <Typography component="h2" sx={sectionHeadingSx}>
             Защо работи?
           </Typography>
           <Box component="ol" sx={{ pl: 2, mt: 0.5, mb: 1 }}>

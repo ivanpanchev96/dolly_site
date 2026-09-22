@@ -151,6 +151,18 @@ export default function Projects() {
 
   return (
     <Box sx={{ bgcolor: "background.default", pb: { xs: 6, md: 8 } }}>
+      {/* Page heading — mirrors the /blog hero heading */}
+      <Container maxWidth="md" sx={{ pt: { xs: 5, md: 6 }, pb: { xs: 1, md: 2 }, px: { xs: 6, md: 3 } }}>
+        <Box sx={{ textAlign: "center" }}>
+          <Typography
+            component="h1"
+            className="blog-page-heading"
+            sx={{ color: "#E1DFDB" }}
+          >
+            Проекти
+          </Typography>
+        </Box>
+      </Container>
       <Container maxWidth="lg" sx={{ py: { xs: 3, md: 4 }, pt: { xs: 4, md: 5 }, px: { xs: 2, sm: 3 } }}>
         <Stack spacing={{ xs: 4, md: 3 }}>
           {rows.map(([leftProject, rightProject], rowIndex) => {

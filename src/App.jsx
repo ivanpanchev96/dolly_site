@@ -36,6 +36,7 @@ import doliCutout from "./assets/home_page/doli-cutout.png";
 import doliSitting from "./assets/home_page/doli-sitting.jpg";
 import Footer from "./components/Footer.jsx";
 import { selectedProjects } from "./data/selectedProjects.js";
+import { IS_PRERENDER } from "./prerenderMode.js";
 import Projects from "./pages/Projects.jsx";
 import HomeInSage from "./pages/HomeInSage.jsx";
 import HomeInBurgundy from "./pages/HomeInBurgundy.jsx";
@@ -78,6 +79,8 @@ function HomePage() {
   const visibleProjectsList = useMemo(() => {
     const n = selectedProjects.length;
     if (n === 0) return [];
+    // Prerender: mount every project so all 8 names reach the static HTML.
+    if (IS_PRERENDER) return selectedProjects;
     return Array.from({ length: PROJECTS_VISIBLE }, (_, i) =>
       selectedProjects[(projectsStartIndex + i) % n]
     );
@@ -120,6 +123,8 @@ function HomePage() {
     if (testimonials.length === 1) {
       return [testimonials[0]];
     }
+    // Prerender: mount all testimonials, not just the current pair.
+    if (IS_PRERENDER) return testimonials;
     const nextIndex = (testimonialIndex + 1) % testimonials.length;
     return [testimonials[testimonialIndex], testimonials[nextIndex]];
   }, [testimonialIndex, testimonials]);
@@ -133,6 +138,7 @@ function HomePage() {
   };
 
   useEffect(() => {
+    if (IS_PRERENDER) return;
     const interval = setInterval(() => {
       setActiveIndex((index) => (index + 1) % images.length);
     }, 3000);
@@ -150,6 +156,7 @@ function HomePage() {
   };
 
   useEffect(() => {
+    if (IS_PRERENDER) return;
     const interval = setInterval(() => {
       setTestimonialIndex((index) => (index + 1) % testimonials.length);
     }, 15000);
@@ -172,7 +179,7 @@ function HomePage() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
-    if (!isMobile) return;
+    if (IS_PRERENDER || !isMobile) return;
     const interval = setInterval(() => {
       setProjectsStartIndex((i) => (i + 1) % selectedProjects.length);
       setRevealedProjectSlot(null);
@@ -278,6 +285,7 @@ function HomePage() {
               sx={{ width: "100%", display: "block" }}
             />
             <Typography
+              component="h1"
               sx={{
                 color: "#E1DFDB",
                 fontFamily: '"Poppins", sans-serif',
@@ -375,6 +383,7 @@ function HomePage() {
           />
           <Box sx={{ flex: 1.1, order: { xs: 1, md: 2 }, display: "flex", flexDirection: "column" }}>
             <Typography
+              component="h2"
               className="section-heading section-heading--bold"
               gutterBottom
               sx={{ color: "#E1DFDB", textAlign: { xs: "center", md: "left" } }}
@@ -434,6 +443,7 @@ function HomePage() {
       <Box sx={{ bgcolor: "#e8e4dc", py: 2 }}>
         <Container maxWidth="lg">
           <Typography
+            component="h2"
             className="section-heading"
             sx={{ color: "#675145", textAlign: "center" }}
           >
@@ -481,7 +491,8 @@ function HomePage() {
                     transition: "transform 0.3s ease",
                   }}
                 />
-                {revealedProjectSlot === slotIndex && (
+                {/* Prerender: reveal every overlay so project names reach the static HTML. */}
+                {(IS_PRERENDER || revealedProjectSlot === slotIndex) && (
                   <Box
                     sx={{
                       position: "absolute",
@@ -565,6 +576,7 @@ function HomePage() {
       >
         <Container maxWidth="lg">
           <Typography
+            component="h2"
             className="section-heading"
             sx={{ color: "#675145", textAlign: "center" }}
           >
@@ -575,32 +587,42 @@ function HomePage() {
 
       <Container maxWidth="lg" sx={{ py: { xs: 4, md: 5 }, bgcolor: "transparent", px: { xs: 7 } }}>
         <Box sx={{ position: "relative" }}>
-          {/* Invisible ghost stack with all testimonials — sets the max height of the section */}
+          {/* Invisible ghost stack with all testimonials — sets the max height of the section.
+              Skipped when prerendering: it repeats the longest testimonial twice, which would be
+              duplicate content in the static HTML now that all of them are mounted below. */}
+          {!IS_PRERENDER && (
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              spacing={3}
+              sx={{ mx: { xs: 0, md: 6 }, visibility: "hidden", pointerEvents: "none" }}
+              aria-hidden="true"
+            >
+              {[testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)].concat(
+                [testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)]
+              ).map((testimonial, i) => (
+                <Box key={i} sx={{ flex: 1, p: { xs: 3, md: 4 }, display: { xs: i > 0 ? "none" : "flex", md: "flex" }, flexDirection: "column" }}>
+                  <Stack direction="row" spacing={0.5} sx={{ mb: 4 }}>
+                    <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                    <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
+                  </Stack>
+                  <Typography color="text.secondary">{testimonial.text}</Typography>
+                  <Typography align="center" color="text.secondary" sx={{ my: 2, fontWeight: 900, fontSize: "1.5rem", lineHeight: 1 }}>—</Typography>
+                  <Typography align="center" color="text.secondary">{testimonial.author}</Typography>
+                </Box>
+              ))}
+            </Stack>
+          )}
+          {/* Visible testimonials absolutely overlaid on the ghost stack that sizes the section.
+              When prerendering the ghost is gone, so these flow normally instead. */}
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={3}
-            sx={{ mx: { xs: 0, md: 6 }, visibility: "hidden", pointerEvents: "none" }}
-            aria-hidden="true"
-          >
-            {[testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)].concat(
-              [testimonials.reduce((a, b) => a.text.length > b.text.length ? a : b)]
-            ).map((testimonial, i) => (
-              <Box key={i} sx={{ flex: 1, p: { xs: 3, md: 4 }, display: { xs: i > 0 ? "none" : "flex", md: "flex" }, flexDirection: "column" }}>
-                <Stack direction="row" spacing={0.5} sx={{ mb: 4 }}>
-                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
-                  <Box component="img" src={quoteSvg} alt="" sx={{ height: { xs: 32, md: 32 } }} />
-                </Stack>
-                <Typography color="text.secondary">{testimonial.text}</Typography>
-                <Typography align="center" color="text.secondary" sx={{ my: 2, fontWeight: 900, fontSize: "1.5rem", lineHeight: 1 }}>—</Typography>
-                <Typography align="center" color="text.secondary">{testimonial.author}</Typography>
-              </Box>
-            ))}
-          </Stack>
-          {/* Visible testimonials absolutely overlaid */}
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={3}
-            sx={{ mx: { xs: 0, md: 6 }, position: "absolute", top: 0, left: 0, right: 0 }}
+            sx={{
+              mx: { xs: 0, md: 6 },
+              ...(IS_PRERENDER
+                ? {}
+                : { position: "absolute", top: 0, left: 0, right: 0 }),
+            }}
           >
             {visibleTestimonials.map((testimonial, i) => (
               <Box
@@ -680,6 +702,7 @@ function HomePage() {
         >
           <Box sx={{ flex: 1.1, order: { xs: 2, md: 1 } }}>
             <Typography
+              component="h2"
               className="section-heading section-heading--bold"
               gutterBottom
               sx={{ color: "#E1DFDB", textAlign: "left" }}

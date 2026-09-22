@@ -58,6 +58,7 @@ export default function BlogPost3() {
           />
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
             <Typography
+              component="h1"
               sx={{
                 fontFamily: '"Roca Two Bold", Georgia, serif',
                 fontSize: { xs: "clamp(20px, 4vw, 32px)", md: "clamp(32px, 3.5vw, 52px)" },
@@ -85,7 +86,7 @@ export default function BlogPost3() {
         <Box>
 
           {/* Средна цена */}
-          <Typography sx={sectionHeadingSx}>
+          <Typography component="h2" sx={sectionHeadingSx}>
             Средна цена за интериорен проект в София през 2026
           </Typography>
           <Typography sx={bodySx}>

@@ -1,6 +1,8 @@
-# Dolly Site
+# Atelier by Doli
 
-Placeholder React project scaffolded with Vite.
+Site for the architecture and interior design studio at
+[atelierbydoli.com](https://atelierbydoli.com/). React + Vite, deployed on
+GitHub Pages.
 
 ## Quick start
 
@@ -9,17 +11,69 @@ npm install
 npm run dev
 ```
 
-## Build and preview
+## Build
 
 ```sh
 npm run build
-npm run preview
 ```
+
+> **Always use `npm run build`, never bare `vite build`.**
+> `vite build` alone produces a `docs/` with no route directories and no
+> `404.html`, which means every route except `/` would return HTTP 404 again.
+
+The build has three stages:
+
+1. `build:vite` — Vite compiles to `docs/`.
+2. `prerender` — headless Chrome loads all 16 routes and writes the rendered
+   HTML to `docs/<route>/index.html`.
+3. `sitemap` — writes `docs/sitemap.xml`.
+
+A failed prerender exits non-zero and stops the build.
+
+## Why prerendering
+
+The site is a client-rendered SPA. LLM crawlers (GPTBot, ClaudeBot,
+PerplexityBot, OAI-SearchBot) do not execute JavaScript, so they used to see an
+empty `<div id="root"></div>` and nothing else. Separately, the old GitHub Pages
+SPA fallback (`cp index.html 404.html`) meant every route except `/` was served
+with a **404 status**.
+
+Prerendering writes a real `index.html` per route, so each one is served with a
+200 and carries its own content, `<title>`, description, canonical URL and `<h1>`
+in the raw bytes.
+
+## Adding or changing a route
+
+`src/data/routes.js` is the single source of truth for prerendering and the
+sitemap. Adding a route means two edits:
+
+1. a `<Route>` in `src/App.jsx`
+2. an entry in `src/data/routes.js` with `path`, `title`, `description` and an
+   `assert` marker
+
+The build fails if the two disagree. Keep `src/data/routes.js` free of JSX and
+asset imports — Node imports it directly.
+
+### Assert markers
+
+Each route asserts that it rendered its *own* content, because `src/App.jsx` has
+a catch-all `<Route path="*">` that redirects to `/`. Without the check, a route
+that isn't wired up would silently snapshot the homepage under its URL.
+
+A marker must be text unique to that page, on a **single source line** in the
+JSX (React joins a text node split across lines with a space). The footer
+renders on every page, so its nav labels can't be used.
 
 ## Deployment
 
-The production build outputs to `dist/` with minified JS/CSS and all assets.
+GitHub Pages serves the `docs/` folder on `main`, so the built output is
+committed. `public/` is copied verbatim into `docs/` by Vite — that's how
+`CNAME` and `robots.txt` get deployed.
 
-- **Vercel:** Connect the repo or run `npx vercel`. Uses `vercel.json`.
-- **Netlify:** Connect the repo or drag & drop `dist/`. Uses `netlify.toml`.
-- **Static hosting:** Upload the entire `dist/` folder. Ensure SPA routing: serve `index.html` for all routes.
+## Notes
+
+- `netlify.toml` and `vercel.json` are leftovers referencing a `dist/` directory
+  this project no longer produces. Unused.
+- Prerendering needs a Chrome that puppeteer manages
+  (`npx puppeteer browsers install chrome`). Set `PUPPETEER_EXECUTABLE_PATH` to
+  override.

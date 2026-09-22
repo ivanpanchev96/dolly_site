@@ -354,6 +354,7 @@ export default function Services() {
           sx={{ mb: { xs: 3, md: 4 } }}
         >
           <Typography
+            component="h1"
             className="section-heading section-heading--bold"
             sx={{ color: "text.primary", textAlign: "center" }}
           >
@@ -447,6 +448,7 @@ export default function Services() {
             </Box>
             <Stack spacing={3} sx={{ flex: { md: "0 0 42%" }, alignItems: "flex-start" }}>
               <Typography
+                component="h2"
                 className="section-heading section-heading--bold"
                 sx={{ color: "#f4ede7", textAlign: "left" }}
               >
@@ -495,6 +497,7 @@ export default function Services() {
           }}
         >
           <Typography
+            component="h2"
             className="section-heading section-heading--bold"
             sx={{ color: "#f4ede7", textAlign: "center" }}
           >

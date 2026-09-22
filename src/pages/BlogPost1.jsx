@@ -53,6 +53,7 @@ export default function BlogPost1() {
           />
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
             <Typography
+              component="h1"
               sx={{
                 fontFamily: '"Roca Two Bold", Georgia, serif',
                 fontSize: { xs: "clamp(20px, 4vw, 32px)", md: "clamp(32px, 3.5vw, 52px)" },
@@ -74,7 +75,7 @@ export default function BlogPost1() {
         <Box>
 
           {/* Section 1 */}
-          <Typography sx={sectionHeadingSx}>
+          <Typography component="h2" sx={sectionHeadingSx}>
             1. Първоначална среща и обсъждане на проекта — изготвяне на специфична оферта
           </Typography>
           <Typography sx={bodySx}>
@@ -102,7 +103,7 @@ export default function BlogPost1() {
           </Typography>
 
           {/* Section 2 */}
-          <Typography sx={sectionHeadingSx}>
+          <Typography component="h2" sx={sectionHeadingSx}>
             2. Изготвяне на задание
           </Typography>
           <Typography sx={bodySx}>

@@ -63,6 +63,7 @@ export default function Studio245() {
             <Stack height="100%" justifyContent="space-between">
               <Stack spacing={2}>
                 <Typography
+                  component="h1"
                   className="section-heading section-heading--bold"
                   sx={{ color: "text.primary", textAlign: "left" }}
                 >

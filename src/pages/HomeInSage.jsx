@@ -29,7 +29,7 @@ export default function HomeInSage() {
           <Grid item xs={12} md={5}>
             <Stack height="100%" justifyContent="space-between">
               <Stack spacing={2}>
-                <Typography className="section-heading section-heading--bold" sx={{ color: "text.primary", textAlign: "left" }}>
+                <Typography component="h1" className="section-heading section-heading--bold" sx={{ color: "text.primary", textAlign: "left" }}>
                   Home in Sage
                 </Typography>
                 <Typography className="project-body" color="text.secondary">

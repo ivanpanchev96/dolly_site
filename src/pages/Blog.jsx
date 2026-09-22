@@ -43,6 +43,7 @@ export default function Blog() {
       <Container maxWidth="md" sx={{ pt: { xs: 5, md: 6 }, pb: { xs: 3, md: 4 }, px: { xs: 6, md: 3 } }}>
         <Box sx={{ textAlign: "center" }}>
           <Typography
+            component="h1"
             className="blog-page-heading"
             sx={{ color: "#E1DFDB", mb: 1 }}
           >
