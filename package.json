@@ -9,6 +9,7 @@
     "build:vite": "vite build",
     "prerender": "node scripts/prerender.mjs",
     "sitemap": "node scripts/sitemap.mjs",
+    "serve:docs": "node scripts/serve-docs.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

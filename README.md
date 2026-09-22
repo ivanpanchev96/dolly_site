@@ -30,6 +30,30 @@ The build has three stages:
 
 A failed prerender exits non-zero and stops the build.
 
+## Checking a build locally
+
+```sh
+npm run build
+npm run serve:docs      # http://localhost:4180
+```
+
+`serve:docs` reproduces GitHub Pages semantics — directory `index.html`,
+a 301 from the slash-less URL, and `404.html` with a real 404 status.
+
+**Do not use `npm run preview` to verify this.** Vite's SPA fallback answers
+every unknown path with 200 + `index.html`, which hides both the 404 status and
+the difference between a prerendered page and the empty shell.
+
+To see what a crawler sees, read the raw bytes — no JavaScript involved:
+
+```sh
+curl -s localhost:4180/services/ | grep 'Често задавани въпроси'
+curl -s -o /dev/null -w '%{http_code}\n' localhost:4180/nope/   # 404
+```
+
+Or load the site in a browser with JavaScript disabled: every page should still
+render its full content.
+
 ## Why prerendering
 
 The site is a client-rendered SPA. LLM crawlers (GPTBot, ClaudeBot,
