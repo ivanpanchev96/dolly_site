@@ -56,10 +56,10 @@ import BlogPost3 from "./pages/BlogPost3.jsx";
 import BlogPost4 from "./pages/BlogPost4.jsx";
 
 const images = [
-  { src: heroSlide1 },
-  { src: heroSlide2 },
-  { src: heroSlide3 },
-  { src: heroSlide4 },
+  { src: heroSlide1, alt: "Дневна с вградена бяла библиотека и телевизор с картина на Ван Гог" },
+  { src: heroSlide2, alt: "Сив диван с две кръгли дъбови масички пред бяла ламперия" },
+  { src: heroSlide3, alt: "Спалня със синя акцентна стена и дизайнерски полилей" },
+  { src: heroSlide4, alt: "Дневна с трапезария в бежови тонове и кръгъл полилей" },
 ];
 
 const navLinks = [
@@ -189,7 +189,7 @@ function HomePage() {
           <Box
             component="img"
             src={active.src}
-            alt=""
+            alt={active.alt}
             sx={{
               display: { xs: "block", md: "none" },
               width: "100%",
@@ -343,7 +343,7 @@ function HomePage() {
           <Box
             component="img"
             src={doliCutout}
-            alt="Doli cutout"
+            alt="Доли Ликоманова, архитект и интериорен дизайнер"
             sx={{
               flex: 0.9,
               width: "100%",
@@ -454,7 +454,7 @@ function HomePage() {
                   className="project-image"
                   component="img"
                   src={project.image}
-                  alt={project.name}
+                  alt={`${project.name} — интериорен проект от Atelier by Doli`}
                   sx={{
                     width: "100%",
                     height: "100%",
@@ -754,7 +754,7 @@ function HomePage() {
             <Box
               component="img"
               src={doliSitting}
-              alt="Doli sitting"
+              alt="Доли Ликоманова в работното си пространство"
               sx={{
                 width: "100%",
                 height: "auto",

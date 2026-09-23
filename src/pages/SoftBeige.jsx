@@ -11,9 +11,21 @@ import img6 from "../assets/home_in_beige/6.jpg";
 const ROW_HEIGHT = 425;
 
 const rows = [
-  { left: img1, right: img2, leftPct: "55%", rightPct: "45%" },
-  { left: img3, right: img4, leftPct: "40%", rightPct: "60%" },
-  { left: img5, right: img6, leftPct: "50%", rightPct: "50%" },
+  {
+    left: img1, right: img2, leftPct: "55%", rightPct: "45%",
+    leftAlt: "Дневна с телевизор, бели рафтове и кухня в дъб",
+    rightAlt: "Баня с дъбови шкафове, душ кабина и огледален шкаф",
+  },
+  {
+    left: img3, right: img4, leftPct: "40%", rightPct: "60%",
+    leftAlt: "Баня с вградени пералня и сушилня в дъбова ниша",
+    rightAlt: "Кухня в дъб и крем с работен кът пред ламелен панел",
+  },
+  {
+    left: img5, right: img6, leftPct: "50%", rightPct: "50%",
+    leftAlt: "Спалня с флорален тапет, дъбово легло и скулптурна лампа",
+    rightAlt: "Спалня с високи гардероби, ниша за телевизор и тоалетка",
+  },
 ];
 
 export default function SoftBeige() {
@@ -51,7 +63,7 @@ export default function SoftBeige() {
             <Box
               component="img"
               src={cover}
-              alt="Soft Beige"
+              alt="Дневна с трапезария, бежов диван и телевизор на бяла стена"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -75,7 +87,7 @@ export default function SoftBeige() {
                 <Box
                   component="img"
                   src={row.left}
-                  alt={`Soft Beige ${i * 2 + 1}`}
+                  alt={row.leftAlt}
                   sx={{
                     width: "100%",
                     height: { xs: "auto", md: "100%" },
@@ -89,7 +101,7 @@ export default function SoftBeige() {
                 <Box
                   component="img"
                   src={row.right}
-                  alt={`Soft Beige ${i * 2 + 2}`}
+                  alt={row.rightAlt}
                   sx={{
                     width: "100%",
                     height: { xs: "auto", md: "100%" },

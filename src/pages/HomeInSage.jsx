@@ -21,6 +21,18 @@ const gallery = [
   wc,
 ];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Дневна с трапезария, сив диван с дървена рамка и рибена кост паркет",
+  "Г-образна кухня с орехови горни шкафове и каменен гръб",
+  "Зона с телевизор и отворен стелаж с растения",
+  "Кът за четене с вградена пейка и зелена възглавница пред прозореца",
+  "Дрешник с отворени рафтове, огледало и тапицирана табуретка",
+  "Спалня с маслиненозелена стена и дървено легло",
+  "Детска стая със зелена тапицирана табла, бюро и рафтове с книги",
+  "Тоалетна със зелени релефни плочки и мивка върху дървен рафт",
+];
+
 export default function HomeInSage() {
   return (
     <Box sx={{ bgcolor: "background.default", pb: { xs: 6, md: 8 } }}>
@@ -56,7 +68,7 @@ export default function HomeInSage() {
             <Box
               component="img"
               src={hero}
-              alt="Home in Sage hero"
+              alt="Дневна в Home in Sage с телевизор, отворен стелаж и маслиненозелена стена"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -71,7 +83,7 @@ export default function HomeInSage() {
               <Box
                 component="img"
                 src={image}
-                alt={`Home in Sage ${index + 1}`}
+                alt={galleryAlt[index]}
                 sx={{
                   width: "100%",
                   height: "100%",

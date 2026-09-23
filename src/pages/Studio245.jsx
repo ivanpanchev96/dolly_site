@@ -17,6 +17,16 @@ const WIDE_RATIO = WIDTH_WIDE / TOTAL_WIDTH;
 
 const gallery = [img1, img2_1, img1_1, img2, img3, plan];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Студио със зелена кухня, трапезария и легло с цветни възглавници",
+  "Мудборд с шалфеено зелено, терацо и цветовата палитра на проекта",
+  "Баня с терацо плочки, ъглов душ и зелен ламелен шкаф",
+  "Изглед от леглото към телевизора, рафтовете и трапезарията",
+  "Кухня с терацо под, зелени фронтове и висящи лампи",
+  "Разпределение на студиото: спална зона 14,9 кв.м, кухненски бокс 6,6 кв.м и баня 2,8 кв.м",
+];
+
 /* Row 1: wide left | narrow right. Row 2: narrow left | wide right. Row 3: wide left | narrow right. */
 const ROW_LAYOUT = [
   { left: "wide", right: "narrow" },
@@ -98,7 +108,7 @@ export default function Studio245() {
             <Box
               component="img"
               src={cover}
-              alt="Studio 24,5"
+              alt="Студио със зелена кухня, трапезария и спална зона в едно пространство"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -129,10 +139,10 @@ export default function Studio245() {
                 }}
               >
                 <Box sx={{ flex: { xs: "1 1 auto", md: leftFlex }, minWidth: 0 }}>
-                  <GalleryImage src={leftImg} alt={`Studio 24,5 ${rowIndex * 2 + 1}`} />
+                  <GalleryImage src={leftImg} alt={galleryAlt[rowIndex * 2]} />
                 </Box>
                 <Box sx={{ flex: { xs: "1 1 auto", md: rightFlex }, minWidth: 0 }}>
-                  <GalleryImage src={rightImg} alt={`Studio 24,5 ${rowIndex * 2 + 2}`} />
+                  <GalleryImage src={rightImg} alt={galleryAlt[rowIndex * 2 + 1]} />
                 </Box>
               </Box>
             );

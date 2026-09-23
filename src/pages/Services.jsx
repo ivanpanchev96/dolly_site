@@ -368,7 +368,7 @@ export default function Services() {
               <Box
                 component="img"
                 src={designStagesImage}
-                alt="Етапи на проектиране"
+                alt="Мостри на подови настилки, цветови палитри и каталози с материали"
                 sx={{
                   width: "100%",
                   height: "100%",

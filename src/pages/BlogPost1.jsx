@@ -42,7 +42,7 @@ export default function BlogPost1() {
           <Box
             component="img"
             src={etapiImg}
-            alt="Етапите на интериорния проект"
+            alt="Доли Ликоманова с книга Designers at Home в работното си пространство"
             sx={{
               width: { xs: "100%", md: 343 },
               height: { xs: "auto", md: 514 },
@@ -123,7 +123,7 @@ export default function BlogPost1() {
           <Box
             component="img"
             src={blogImg1}
-            alt="Идейна фаза"
+            alt="Ръчна скица на разпределението, технически план и 3D визуализация на кабинет"
             sx={{ width: "100%", height: "auto", display: "block", mt: 3 }}
           />
 
@@ -155,7 +155,7 @@ export default function BlogPost1() {
           <Box
             component="img"
             src={blogImg2}
-            alt="Технически проект"
+            alt="Мостри на материали, визуализация на работен кът и проект на осветлението"
             sx={{ width: "100%", height: "auto", display: "block", mt: 3 }}
           />
 
@@ -211,7 +211,7 @@ export default function BlogPost1() {
           <Box
             component="img"
             src={blogImg3}
-            alt="Резултат"
+            alt="Оглед на обекта по време на ремонта и завършената кухня"
             sx={{ width: "100%", height: "auto", display: "block", mt: 3 }}
           />
 

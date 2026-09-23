@@ -40,7 +40,7 @@ export default function BlogPost4() {
           <Box
             component="img"
             src={lightCover}
-            alt="Осветление в интериора"
+            alt="Спалня с насочена лампа за четене над нощното шкафче"
             sx={{
               width: { xs: "100%", md: 343 },
               height: { xs: "auto", md: 514 },
@@ -107,7 +107,7 @@ export default function BlogPost4() {
           <Box
             component="img"
             src={lightLong}
-            alt="Осветление примери"
+            alt="Баня с терацо, осветена с вградено, огледално и акцентно осветление"
             sx={{ width: "100%", height: "auto", display: "block", mt: 3 }}
           />
 

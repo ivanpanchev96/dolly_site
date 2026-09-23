@@ -49,6 +49,28 @@ const gallery = [
   img11,
 ];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Трапезария с дъбова маса и бяла преграда с телевизор към дневната",
+  "Трапезария с витрина и кръгъл полилей",
+  "Изглед от трапезарията към телевизора във вградената библиотека",
+  "Детайл от дъбовата маса с книга и купа с цитруси",
+  "Бяла вградена библиотека с телевизор между дневната и трапезарията",
+  "Дневна със сиво-зелен диван и кът за сядане до прозореца",
+  "Кът за четене до прозореца с библиотеки от двете страни",
+  "Трапезария и кухня с мраморен плот на преден план",
+  "Кухня с шалфеено зелени фронтове, мраморен гръб и барплот",
+  "Детайл от кухнята с бяла мивка и месингов смесител",
+  "Тоалетна със зелени вертикални плочки",
+  "Мивка върху дървен плот с овално огледало в тоалетната",
+  "Баня с травертин, ламелен шкаф и купа-мивка",
+  "Спалня със зелени гардероби и панелна стена зад леглото",
+  "Спалня със зелен гардероб и текстилен абажур",
+  "Антре със зелен панел, закачалки и пейка с място за съхранение",
+  "Кът за работа до прозореца с пейка и рафтове",
+  "Детайл от пейката с чекмедже и месингова дръжка",
+];
+
 /* Rows 1–5, 7: 2 photos (wide 770px | narrow 335px). Rows 6, 8: 3 photos (all 335px). */
 const ROW_CONFIG = [
   { count: 2, left: "wide", right: "narrow" },
@@ -134,7 +156,7 @@ export default function HomeInPastel() {
             <Box
               component="img"
               src={cover}
-              alt="Home in Pastel"
+              alt="Дневна с бяла библиотека, вграден телевизор и кът за сядане до прозореца"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -166,7 +188,7 @@ export default function HomeInPastel() {
                     >
                       <GalleryImage
                         src={src}
-                        alt={`Home in Pastel ${startIdx + i + 1}`}
+                        alt={galleryAlt[startIdx + i]}
                       />
                     </Box>
                   ))}
@@ -193,10 +215,10 @@ export default function HomeInPastel() {
                 }}
               >
                 <Box sx={{ flex: { xs: "1 1 auto", md: leftFlex }, minWidth: 0 }}>
-                  <GalleryImage src={leftImg} alt={`Home in Pastel ${startIdx + 1}`} />
+                  <GalleryImage src={leftImg} alt={galleryAlt[startIdx]} />
                 </Box>
                 <Box sx={{ flex: { xs: "1 1 auto", md: rightFlex }, minWidth: 0 }}>
-                  <GalleryImage src={rightImg} alt={`Home in Pastel ${startIdx + 2}`} />
+                  <GalleryImage src={rightImg} alt={galleryAlt[startIdx + 1]} />
                 </Box>
               </Box>
             );

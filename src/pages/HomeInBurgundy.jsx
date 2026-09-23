@@ -19,6 +19,18 @@ const WIDE_RATIO = WIDTH_WIDE / TOTAL_WIDTH;
 
 const gallery = [img2, img7, img3, img8, img6, img4, img1, img9];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Помощно помещение с вграден гардероб, рафтове за пране и пералня",
+  "Дневна със синьо-сив диван, червен полилей и трапезария",
+  "Антре с висок бежов гардероб и овално огледало над червена конзола",
+  "Телевизор пред червено ламелно пано и синя конзола",
+  "Дъбов ламелен скрин с бордо картина до кухнята",
+  "Кухня с бордо горни шкафове и светлосиви долни фронтове",
+  "Баня с травертин, теракотена душ зона и бордо шкаф под мивката",
+  "Баня с вградена ниша и стъклен параван на душа",
+];
+
 /* Row 1–2: wide left | narrow right. Row 3: narrow left | wide right. Row 4: wide left | narrow right. */
 const ROW_LAYOUT = [
   { left: "wide", right: "narrow" },
@@ -94,7 +106,7 @@ export default function HomeInBurgundy() {
             <Box
               component="img"
               src={cover}
-              alt="Burgundy Home"
+              alt="Спалня с флорален тапет с жерави и бордо пано зад синьо легло"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -125,10 +137,10 @@ export default function HomeInBurgundy() {
                 }}
               >
                 <Box sx={{ flex: { xs: "1 1 auto", md: leftFlex }, minWidth: 0 }}>
-                  <GalleryImage src={leftImg} alt={`Burgundy Home ${rowIndex * 2 + 1}`} />
+                  <GalleryImage src={leftImg} alt={galleryAlt[rowIndex * 2]} />
                 </Box>
                 <Box sx={{ flex: { xs: "1 1 auto", md: rightFlex }, minWidth: 0 }}>
-                  <GalleryImage src={rightImg} alt={`Burgundy Home ${rowIndex * 2 + 2}`} />
+                  <GalleryImage src={rightImg} alt={galleryAlt[rowIndex * 2 + 1]} />
                 </Box>
               </Box>
             );

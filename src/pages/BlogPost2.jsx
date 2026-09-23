@@ -42,7 +42,7 @@ export default function BlogPost2() {
           <Box
             component="img"
             src={kitchenImg}
-            alt="Как да направиш кухнята функционална"
+            alt="Кухня с терацо плот, бели ламелни шкафове и синя акцентна стена"
             sx={{
               width: { xs: "100%", md: 343 },
               height: { xs: "auto", md: 514 },
@@ -89,7 +89,7 @@ export default function BlogPost2() {
           <Box
             component="img"
             src={kitchenTriangle}
-            alt="Правилото на триъгълника в кухнята"
+            alt="Три схеми на кухненския триъгълник: при линейна, Г-образна и П-образна кухня"
             sx={{ width: "100%", height: "auto", display: "block", mt: 3 }}
           />
 

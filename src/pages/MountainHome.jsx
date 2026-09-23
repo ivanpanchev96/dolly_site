@@ -15,6 +15,18 @@ const GALLERY_HEIGHT = 691;
 
 const gallery = [img3, img4, img6, img5, img2, img1, img7, img8];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Спалня със сива тапицирана табла, дървени ламели и открити греди",
+  "Спалня с ватирана кувертюра и кът за гримиране до прозореца",
+  "Трапезария с дъбова маса и шест букле стола",
+  "Трапезария с изглед към стълбището и градината",
+  "Дневна с телевизор върху ламелен шкаф и букле диван",
+  "Дневна с цяла стена дъбови шкафове и тъмни ниши",
+  "Кухня с тъмносиви фронтове, дървен гръб и осветление под шкафовете",
+  "Детайл от кухнята с черна мивка и дъски за рязане",
+];
+
 function GalleryImage({ src, alt }) {
   return (
     <Box
@@ -87,7 +99,7 @@ export default function MountainHome() {
             <Box
               component="img"
               src={cover}
-              alt="Mountain Home"
+              alt="Спалня с дървени ламели, гравюри с птици и кът за гримиране"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -111,7 +123,7 @@ export default function MountainHome() {
                 <GalleryImage
                   key={colIndex}
                   src={src}
-                  alt={`Mountain Home ${rowIndex * 2 + colIndex + 1}`}
+                  alt={galleryAlt[rowIndex * 2 + colIndex]}
                 />
               ))}
             </Box>

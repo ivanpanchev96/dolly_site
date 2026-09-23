@@ -35,6 +35,23 @@ const ROW_CONFIG = [
 
 const gallery = [img2, img15, img14, img3, img4, img16, img17, img1, img5, img18, img13, img21, img11];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Спалня със синя стена, черен полилей и врата към балкона",
+  "Детайл от сивата тапицирана табла и рибена кост паркет",
+  "Кръгло огледало над бяла ламелна конзола в спалнята",
+  "Спалня с бели гардероби и отворени рафтове",
+  "Дневна със сив диван, две кръгли дъбови масички и синьо килимче",
+  "Детайл от дъбовите масички пред дивана",
+  "Трапезария с дъбова маса и бежови тапицирани столове",
+  "Дневна и трапезария с рибена кост паркет",
+  "Кухня с терацо плот и бели ламелни горни шкафове",
+  "Кухня със синя акцентна зона и терацо барплот",
+  "Детайл от банята с дъбов шкаф и вградена ниша",
+  "Баня със сив терацо, черен ламелен шкаф и дървена душ стена",
+  "Тоалетна със сив терацо и дъбов шкаф",
+];
+
 function GalleryImage({ src, alt }) {
   return (
     <Box
@@ -106,7 +123,7 @@ export default function HomeInBlue() {
             <Box
               component="img"
               src={cover}
-              alt="Home in Blue"
+              alt="Спалня със синя акцентна стена, кръгла картина и черен полилей"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -136,7 +153,7 @@ export default function HomeInBlue() {
                         minWidth: 0,
                       }}
                     >
-                      <GalleryImage src={src} alt={`Home in Blue ${startIdx + i + 1}`} />
+                      <GalleryImage src={src} alt={galleryAlt[startIdx + i]} />
                     </Box>
                   ))}
                 </Box>
@@ -163,10 +180,10 @@ export default function HomeInBlue() {
                 }}
               >
                 <Box sx={{ flex: { xs: "1 1 auto", md: leftFlex }, minWidth: 0 }}>
-                  <GalleryImage src={leftImg} alt={`Home in Blue ${startIdx + 1}`} />
+                  <GalleryImage src={leftImg} alt={galleryAlt[startIdx]} />
                 </Box>
                 <Box sx={{ flex: { xs: "1 1 auto", md: rightFlex }, minWidth: 0 }}>
-                  <GalleryImage src={rightImg} alt={`Home in Blue ${startIdx + 2}`} />
+                  <GalleryImage src={rightImg} alt={galleryAlt[startIdx + 1]} />
                 </Box>
               </Box>
             );

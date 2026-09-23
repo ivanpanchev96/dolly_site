@@ -46,7 +46,7 @@ export default function BlogPost3() {
           <Box
             component="img"
             src={blogNewImg}
-            alt="Колко струва един интериорен проект в София през 2026"
+            alt="Таблет с разпределение на апартамент до мостри на материали и рулетка"
             sx={{
               width: { xs: "100%", md: 343 },
               height: { xs: "auto", md: 514 },

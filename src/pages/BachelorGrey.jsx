@@ -18,6 +18,18 @@ const ROW4_RIGHT = 394;
 
 const gallery = [img1, img6, img2, img4, img3, img5, img7, img8];
 
+/* Descriptions of each gallery image, in the same order. */
+const galleryAlt = [
+  "Стена с телевизор върху текстурна сива мазилка и висящ шкаф",
+  "Бяла кухня с мраморен гръб и барплот с два стола",
+  "Антре с пейка, закачалки и ниши за декорация",
+  "Дневна с телевизор, ниши за декорация и тъмна завеса",
+  "Спалня със сива тапицирана табла и понижен таван с осветление",
+  "Тъмносива гардеробна стена с бели чекмеджета",
+  "Отворена кухня с барплот към дневната",
+  "Кухня с остров, барстолове и вградени фурни",
+];
+
 /* Rows 1–3: left 530px, right 577px. Row 4: left 709px, right 394px. */
 const ROW_LAYOUT = [
   { left: ROW1_3_LEFT, right: ROW1_3_RIGHT },
@@ -96,7 +108,7 @@ export default function BachelorGrey() {
             <Box
               component="img"
               src={cover}
-              alt="Bachelor Grey"
+              alt="Дневна с бяла кухня, барплот и сив ъглов диван"
               sx={{
                 width: "100%",
                 objectFit: "cover",
@@ -122,10 +134,10 @@ export default function BachelorGrey() {
                 }}
               >
                 <Box sx={{ flex: { xs: "1 1 auto", md: leftFlex }, minWidth: 0 }}>
-                  <GalleryImage src={leftImg} alt={`Bachelor Grey ${rowIndex * 2 + 1}`} />
+                  <GalleryImage src={leftImg} alt={galleryAlt[rowIndex * 2]} />
                 </Box>
                 <Box sx={{ flex: { xs: "1 1 auto", md: rightFlex }, minWidth: 0 }}>
-                  <GalleryImage src={rightImg} alt={`Bachelor Grey ${rowIndex * 2 + 2}`} />
+                  <GalleryImage src={rightImg} alt={galleryAlt[rowIndex * 2 + 1]} />
                 </Box>
               </Box>
             );
